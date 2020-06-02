@@ -53,29 +53,27 @@ dados %<>% as.data.frame() %>% mutate(`X1` = as.Date(as.POSIXct(`X1`)),
                                       `X12` = factor(X12, ordered = TRUE),
                                       `X13` = factor(X13, ordered = TRUE))
 
-attach(dados) # uso esse comando para nao precisar toda hora digitar o nome do objeto
-
 # Criando uma nova variável: Idade atual
 dados$Idade <- year(X1) - year(X7)
 
 # Criando uma nova variável: Dummy para Idade acima da idade mediana
 dados$Dummy_Idade <- case_when(
-  Idade > median(Idade) ~ 1,
+  dados$Idade > median(dados$Idade) ~ 1,
   TRUE ~ 0
 )
 dados$Dummy_Idade %<>% as.factor()
 
 # Criando uma nova variável: quartil de Idade
-dados$Quartil_Idade <- cut(Idade, breaks = quantile(Idade, probs = seq(0, 1, 0.25)), include.lowest = TRUE)
+dados$Quartil_Idade <- cut(dados$Idade, breaks = quantile(dados$Idade, probs = seq(0, 1, 0.25)), include.lowest = TRUE)
 
 # Criando uma nova variável: Grupo etário quinquenal
-dados$grupo_etario <- cut(Idade, breaks = seq(0, 80, 5), include.lowest = TRUE, right = FALSE)
+dados$grupo_etario <- cut(dados$Idade, breaks = seq(0, 80, 5), include.lowest = TRUE, right = FALSE)
 
 # Criando uma nova variável: Coorte
 dados$coorte <- as.factor(case_when(
-  X6 < 2010 ~ "<2010",
-  between(X6, 2010, 2014) ~ "2010-2014",
-  between(X6, 2015, 2019) ~ "2015-2019",
+  dados$X6 < 2010 ~ "<2010",
+  between(dados$X6, 2010, 2014) ~ "2010-2014",
+  between(dados$X6, 2015, 2019) ~ "2015-2019",
   TRUE ~ "2020"
   ))
 
@@ -159,7 +157,9 @@ likert_X10 <- c("Discordo completamente",
 
 dados <- dados %>% 
   mutate(X10 = factor(dados$X10,
-                        levels = likert_X10)) 
+                      levels = c(1:5),
+                      ordered = TRUE,
+                      labels=likert_X10)) 
 
 colsummary <- likert(as.data.frame(dados[,10]))
 summary(colsummary)
@@ -167,84 +167,39 @@ plot(colsummary)
 
 # Criando os rotulos das categorias das variaveis com escala Likert para varias variaveis
 
-likert_1 <- c("Muito pouco provável",
-              "Pouco provável",
-              "Igualmente provável",
-              "Provável",
-              "Muito provável")
+likert_X12 <- c("Completamente vulneravel",
+                "Vulneravel",
+                "Indiferente",
+                "Protegido",
+                "Completamente protegido")
 
-likert_2 <- c("Não projete",
-              "Pouco efetivo",
-              "Mais ou menos efetivo",
-              "Muito efetivo",
-              "Totalmente efetivo")
+likert_X13 <- c("Muito ruim",
+                "Ruim",
+                "Nem bom nem ruim",
+                "Bom",
+                "Muito bom")
 
-likert_3 <- c("Nenhuma outra",
-              "Pouquíssimas",
-              "Poucas",
-              "Algumas",
-              "Muitas")
+dados <- dados %>% 
+  mutate(X12 = factor(dados$X12,
+                      levels = c(1:5),
+                      ordered = TRUE,
+                      labels=likert_X12),
+         X13 = factor(dados$X13,
+                      levels = c(1:5),
+                      ordered = TRUE,
+                      labels=likert_X13)) 
 
-likert_4 <- c("Sem custo",
-              "Muito barato",
-              "Preço razoável",
-              "Caro",
-              "Caríssimo")
+# Salvando um subconjunto de dados com as variaveis tipo Likert
 
-likert_5 <- c("Nenhum",
-              "Pouquíssimo tempo",
-              "Tempo razoável",
-              "Muito tempo",
-              "Muitíssimo tempo")
-
-likert_6 <- c("Nenhum",
-              "Pouquíssimo esforço",
-              "Esforço razoável",
-              "Muito esforço",
-              "Esforço excessivo")
-
-likert_7 <- c("Facílimo",
-              "Fácil",
-              "Nem fácil nem difícil",
-              "Difícil",
-              "Dificílimo")
-
-likert_8 <- c("Nenhuma",
-              "Pouca",
-              "Nem pouca nem muita",
-              "Muita",
-              "Toda a ajuda possível")
-
-# Transformando as questoes Likert em fatores (variaveis X33 ate X37)
-
-temp = dados[,c(33:37)]
-
-temp <- temp %>% 
-  mutate(`X33` = factor(`X33`,
-                        ordered = TRUE,
-                        levels = likert_1),
-         `X34` = factor(`X34`,
-                        ordered = TRUE,                        
-                        levels = likert_1),
-         `X35` = factor(`X35`,
-                        ordered = TRUE,
-                        levels = likert_1),
-         `X36` = factor(`X36`,
-                        ordered = TRUE,
-                        levels = likert_1),
-         `X37` = factor(`X37`,
-                        ordered = TRUE,
-                        levels = likert_1))   
+temp = subset(dados,select=c(X10,X12,X13))
 
 # Conferindo as classes das novas variaveis (todas tem que ser fator)
 str(temp)
 temp=as.data.frame(temp)
 names(temp)
-colnames(temp) = c("Probabilidade de desastre",
-                   "Dano ao patrimômino público",
-                   "Dano a sua casa e pertences",
-                   "Ameaça a sua vida e família",
-                   "Vida afetada por muito tempo")
+colnames(temp) = c("Aulas online x presenciais",
+                   "Vulnerabilidade a Covid-19",
+                   "Expertise em codigo-aberto")
 colsummary <- likert(temp)
 summary(colsummary) # Descrevendo os resultados
 plot(colsummary) # Criando um grafico de barra dos resultados
@@ -252,15 +207,15 @@ plot(colsummary) # Criando um grafico de barra dos resultados
 # Tabelas Cruzadas de duas variáveis qualitativas
 
 # Jeito mais simples
-x = table(dados$cor, dados$sexo) # valores absolutos
+x = table(dados$X12, dados$X8) # valores absolutos
 
 prop.table(x) # valores relativos
 
 # Usando a funcao CrossTable (do pacote "gmodels")
-if(!require(gmodels)){install.packages("gmodels");library(gmodels)}
+if(!require(gmodels)){install.packages("gmodels");require(gmodels)}
 
 # Tabela com proporcoes em relacao ao total da amostra
-CrossTable(dados$cor, dados$sexo, # as duas variaveis de analise
+CrossTable(dados$X12, dados$Dummy_Idade, # as duas variaveis de analise
            prop.t=TRUE, # se a soma é no total da amostra
            prop.chisq=FALSE, # para nao mostrar teste de hipotese
            prop.r=FALSE, # se total da soma é na linha
@@ -269,7 +224,7 @@ CrossTable(dados$cor, dados$sexo, # as duas variaveis de analise
            digits=2) # numero de casas decimais para percentual
 
 # Tabela com proporcoes em relacao ao total da linha
-CrossTable(dados$cor, dados$sexo, # as duas variaveis de analise
+CrossTable(dados$X12, dados$Dummy_Idade, # as duas variaveis de analise
            prop.t=FALSE, # se a soma é no total da amostra
            prop.chisq=FALSE, # para nao mostrar teste de hipotese
            prop.r=TRUE, # se total da soma é na linha
@@ -278,7 +233,7 @@ CrossTable(dados$cor, dados$sexo, # as duas variaveis de analise
            digits=2) # numero de casas decimais para percentual
 
 # Tabela com proporcoes em relacao ao total da coluna
-CrossTable(dados$cor, dados$sexo, # as duas variaveis de analise
+CrossTable(dados$X12, dados$Dummy_Idade, # as duas variaveis de analise
            prop.t=FALSE, # se a soma é no total da amostra
            prop.chisq=FALSE, # para nao mostrar teste de hipotese
            prop.r=FALSE, # se total da soma é na linha
@@ -287,5 +242,5 @@ CrossTable(dados$cor, dados$sexo, # as duas variaveis de analise
            digits=2) # numero de casas decimais para percentual
 
 # Salvando novamente os dados depois de tudo que fizemos
-save.image(file="dados.desastres.RData")
+save.image(file="dados.workshop.RData")
 
