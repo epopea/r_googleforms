@@ -8,7 +8,6 @@ date: |
       | Cedeplar, Universidade Federal de Minas Gerais
       | 09 March 2020 - Belo Horizonte, Brazil
 output: pdf_document
-fontsize: 14pt
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +20,7 @@ Follow the steps above:
 
 * First, open RStudio on your computer as an administrator:
 
-  + If you are a Windows user, right click on RStudio and Select ``Open as administrator``
+  + If you are a Windows user, right click on RStudio and select ``Open as administrator``
   + If you are a Mac of Linux user:
   
     + Go to <tt>`Applications`</tt>
@@ -32,9 +31,9 @@ Follow the steps above:
     + Press on ENTER
     
 * Then click on <tt>`File`</tt> $\rightarrow$ \texttt{New Project...} $\rightarrow$ \texttt{Version Control} $\rightarrow$ <tt>`Git`</tt>
-* In the first **text block** (Repository URL the following code) insert: <https://github.com/epopea/workshop.git>
+* In the first **text block** (Repository URL the following code) insert: \texttt{\url{https://github.com/epopea/workshop.git}}
 * The second **text block** will be automatically filled
-* In the thir **text block** select ``Browser`` and choose the folder where you want everything to be saved. In our case, we have chosen a folder where the Git was installed: <tt>`/Library/Developer/CommandLineTools/usr/share/git-core/perl/Git`</tt>
+* In the third **text block** select ``Browser`` and choose the folder where you want everything to be saved. In our case, we have chosen a folder where the Git was installed: \texttt{\url{/Library/Developer/CommandLineTools/usr/share/git-core/perl/Git}}
 * After choosing the sub-folder, just click on the button **Create Project**.
 
 Now you should be able to see the workshop folder loaded in the <tt>`Files`</tt> tab of RStudio
