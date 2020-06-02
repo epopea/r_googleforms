@@ -18,14 +18,16 @@ rm(list=ls(all=T))
 if(!require(dplyr)){install.packages("dplyr");require(dplyr)}
 if(!require(magrittr)){install.packages("magrittr");require(magrittr)}
 if(!require(likert)){install.packages("likert");require(likert)}
+if(!require(skimr)){install.packages("skimr");require(skimr)}
 
 #------------------------------------------------#
 # PRIMEIROS PASSOS AO IMPORTAR UM BANCO DE DADOS #
 #------------------------------------------------#
 
-# Definindo a pasta de trabalho
+# Definindo a pasta de trabalho (voce deve mudar para o que quiser
+# ou deixar no local onde definiu quando criou o projeto)
 
-setwd("/Users/")
+setwd("/Library/Developer/CommandLineTools/usr/share/git-core/perl/Git/workshop")
 
 # Carregando os dados salvos em formato RData
 getwd() # verificando se o R ja esta na pasta onde esta o banco em formato RData
@@ -47,8 +49,11 @@ dados %<>% as.data.frame() %>% mutate(`X1` = as.Date(as.POSIXct(`X1`)),
                                       `X8` = as.factor(`X8`),
                                       `X9` = as.factor(`X9`),
                                       `X10` = factor(X10, ordered = TRUE),
-                                      `X11` = as.factor(`X11`))
+                                      `X11` = as.factor(`X11`),
+                                      `X12` = factor(X12, ordered = TRUE),
+                                      `X13` = factor(X13, ordered = TRUE))
 
+attach(dados) # uso esse comando para nao precisar toda hora digitar o nome do objeto
 
 # Criando uma nova variável: Idade atual
 dados$Idade <- year(X1) - year(X7)
@@ -58,6 +63,7 @@ dados$Dummy_Idade <- case_when(
   Idade > median(Idade) ~ 1,
   TRUE ~ 0
 )
+dados$Dummy_Idade %<>% as.factor()
 
 # Criando uma nova variável: quartil de Idade
 dados$Quartil_Idade <- cut(Idade, breaks = quantile(Idade, probs = seq(0, 1, 0.25)), include.lowest = TRUE)
@@ -109,7 +115,7 @@ save(dados,file="dados.RData")
 # - discreta (numero de filhos, numero de carros): class(var) -> "integer"
 
 # Descritiva do banco de dados
-describe(dados)
+skimr::skim(dados)
 
 # Descritiva de variaveis selecionadas #
 
@@ -118,6 +124,7 @@ describe(dados)
 # Tabela de Frequencia Absoluta de Cor/Etnia
 table(X11) # tabulacao simples
 table(X11, useNA="no") #useNA tem 3 opcoes: no, ifany, always
+table(X11, useNA="ifany")
 table(X11, useNA="always")
 addmargins(table(X11)) #acrescenta o total ao final
 

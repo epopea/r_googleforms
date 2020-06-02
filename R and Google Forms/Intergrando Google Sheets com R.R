@@ -70,11 +70,6 @@ names(dados) <- names
 # ORGANIZANDO OS DADOS IMPORTADOS #
 #---------------------------------#
 
-# Salvando a primeira linha como dicionario de dados
-dicionario <- dados %>%
-  mutate_all(as.character) # transformando todas as 
-
-
 # Verificando a classe de cada variavel do dicionario
 str(dicionario)
 
