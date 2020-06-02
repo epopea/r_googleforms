@@ -26,6 +26,7 @@ rm(list=lsf.str(all=T)) # quando quiser apagar apenas as funções, e não o Glo
 
 if(!require(googlesheets4)){install.packages("googlesheets4");require(googlesheets4)}
 if(!require(dplyr)){install.packages("dplyr");require(dplyr)}
+if(!require(lubridate)){install.packages("lubridate");require(lubridate)}
 if(!require(magrittr)){install.packages("magrittr");require(magrittr)}
 if(!require(likert)){install.packages("likert");require(likert)}
 if(!require(googledrive)){install.packages("googledrive");require(googledrive)}
@@ -46,43 +47,41 @@ drive_user()
 # o comando abaixo cria um objeto do tipo tibble (uma estrutura de dados similar a um dataframe).
 # Ele tem uma coluna para cada questao e outra coluna para o horario da resposta ao questionario
 # alem do email do respondente (a menos que voce programou o formulario para ser anonimo).
-dados <- googledrive::drive_get("dados") %>%
-  read_sheet()
 
-# Leia os dados acessados em formato de data frame
-dados1 <- googledrive::drive_get("dados") %>%
+dados <- googledrive::drive_get("dados") %>%
   read_sheet(sheet = 1,
-             col_names = FALSE, # fazendo com que o texto da pergunta nao seja lido como col_names
+             col_names = TRUE, # fazendo com que o texto da pergunta nao seja lido como col_names
              skip=0) # Se eu quiser eliminar o texto da pergunta da primeira linha -> skip=1
 
 
 # Visualizando os dados
-View(dados1)
+View(dados)
 
-dados1 %<>% as.data.frame()
+# Juntando o nome das colunas do banco de dados com o nome das variaveis do dicionario
+# e mudando o nome das colunas do dicionario com bind_cols
+names <- paste0("X", 1:length(dados))
+dicionario <- bind_cols("Codigo das variaveis" = names,
+                        "Nome das variaveis" = colnames(dados))
+
+# Mudando o nome das colunas para código das variáveis
+names(dados) <- names
+
+
 
 #---------------------------------#
 # ORGANIZANDO OS DADOS IMPORTADOS #
 #---------------------------------#
 
 # Salvando a primeira linha como dicionario de dados
-dicionario <- dados1[1,] %>%
+dicionario <- dados %>%
   mutate_all(as.character) # transformando todas as 
-
-# Colocando o dicionario em forma de coluna
-dicionario=t(dicionario) # o comando t() muda o objeto para matriz
-
-# Juntando o nome das colunas do banco de dados com o nome das variaveis do dicionario
-# e mudando o nome das colunas do dicionario com bind_cols 
-dicionario=bind_cols("Codigo das variaveis"=colnames(dados1),
-                     "Nome das variaveis"=dicionario)
 
 
 # Verificando a classe de cada variavel do dicionario
 str(dicionario)
 
 # Visualizando para ver se fizemos tudo certo
-View(dados1)
+View(dados)
 
 # Salvando os objetos criados ate agora na sua pasta
 
@@ -100,7 +99,7 @@ save(data = dados,
 
 # Se quiser remover um objeto esquecifico
 
-rm(dados1)
+rm(dados)
 
 # Remover todos
 rm(list=ls(all=T))

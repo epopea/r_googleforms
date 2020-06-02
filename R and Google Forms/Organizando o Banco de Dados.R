@@ -5,7 +5,7 @@
 # Data: 09/06/2020
 # Horário: 14:00
 # Duração: 90 minutos
-
+#We have to change X1(Date), X7(Date), X8(Factor), X9(Very complicated Factor), X11(Factor)
 #--------------------------------#
 # INICIANDO A SESSÃO DE TRABALHO #
 #--------------------------------#
@@ -42,93 +42,55 @@ str(dados)
 attach(dados) # uso esse comando para nao precisar toda hora digitar o nome do objeto
 
 # Transformando variaveis com classe incorreta #
+dados %<>% as.data.frame() %>% mutate(`X1` = as.Date(as.POSIXct(`X1`)),
+                                      `X7` = as.Date(as.POSIXct(`X7`)),
+                                      `X8` = as.factor(`X8`),
+                                      `X9` = as.factor(`X9`),
+                                      `X10` = factor(X10, ordered = TRUE),
+                                      `X11` = as.factor(`X11`))
 
-# Idade (de texto para inteiro)
-X3
-dados$X3 = as.integer(dados$X3) # transformando idade em inteiro
-dados$X3
 
-# Cor/etnia (de texto para fator)
-X4
-table(dados$X4)
+# Criando uma nova variável: Idade atual
+dados$Idade <- year(X1) - year(X7)
 
-# Criando um vetor texto para os rotulos (labels) das categorias de cor/etnia
-etnia = c("Branca","Preta","Amarela","Parda","Indígena")
+# Criando uma nova variável: Dummy para Idade acima da idade mediana
+dados$Dummy_Idade <- case_when(
+  Idade > median(Idade) ~ 1,
+  TRUE ~ 0
+)
 
-# Forma 1: usando funcao mutate do pacote dplyr
-class(dados$X4)
-dados <- dados %>% 
-  mutate(`X4` = factor(`X4`,
-                       levels = etnia))  
-class(dados$X4) #checando se deu certo
-table(dados$X4)
+# Criando uma nova variável: quartil de Idade
+dados$Quartil_Idade <- cut(Idade, breaks = quantile(Idade, probs = seq(0, 1, 0.25)), include.lowest = TRUE)
 
-# Forma 2: usando funcao ifelse (criando outra variavel)
-dados$cor = ifelse(dados$X4=="Branca",1,
-                   ifelse(dados$X4=="Preta",2,
-                          ifelse(dados$X4=="Amarela",3,
-                                 ifelse(dados$X4=="Parda",4,5))))
+# Criando uma nova variável: Grupo etário quinquenal
+dados$grupo_etario <- cut(Idade, breaks = seq(0, 80, 5), include.lowest = TRUE, right = FALSE)
 
-table(dados$cor) # acabamos de criar uma coluna nova no banco
-class(dados$cor) # a nova variavel e numerica, vamos passar para fator
-
-dados$cor = factor(dados$cor,
-                   levels=c(1,2,3,4,5),
-                   labels=c("Branca","Preta","Amarela","Parda","Indigena"))
-class(dados$cor) #checando se deu certo
-
-table(dados$cor)
-
-# Sexo ao nascer
-
-class(dados$X5) # verificando a classe da variavel
-X5
-table(X5) # vendo a quantidade de casos em cada categoria
-
-dados$sexo = ifelse(dados$X5=="Feminino",1,0)
-dados <- dados %>%
-  mutate(`sexo` = factor(`sexo`,
-                         levels=c(0,1),
-                         labels=c("Masculino","Feminino")))
-class(dados$sexo) # conferindo se deu certo
-
-# Vamos criar uma variavel para tempo de residencia em BH
-
-dados$tresid = NA
-dados$tresid=ifelse(is.na(dados$X8),dados$X3,dados$tresid)
-View(dados[,c("X3","X6","X7","X8","tresid")]) # verificando se deu certo
-# o resto temos que fazer a mao
-dados[c(1,36),"tresid"] = 7 # adicionei o valor 7 para as linhas 1 e 36 na coluna tresid
-dados[c(3,9),"tresid"] = 3
-dados[4,"tresid"] = 55
-dados[c(6,13,48),"tresid"] = 12
-dados[8,"tresid"] = 9
-dados[10,"tresid"] = 2
-dados[11,"tresid"] = 4
-dados[c(17,20,24,27,32,43,45,51),"tresid"] = 0
-dados[c(25,29),"tresid"] = 6
-dados[c(28,37),"tresid"] = 5
-dados[34,"tresid"] = 18
-dados[39,"tresid"] = 20
-dados[42,"tresid"] = 11
-dados[53,"tresid"] = 10
-View(dados[,c("X3","X6","X7","X8","tresid")]) # verificando se deu certo
+# Criando uma nova variável: Coorte
+dados$coorte <- as.factor(case_when(
+  X6 < 2010 ~ "<2010",
+  between(X6, 2010, 2014) ~ "2010-2014",
+  between(X6, 2015, 2019) ~ "2015-2019",
+  TRUE ~ "2020"
+  ))
 
 # Excluindo uma variavel do banco de dados
 
 dados$temp = NA # criei uma variavel temporaria
 dados=subset(dados, select = -temp) #agora eu excluo a variavel que criei
+
 # Forma alternativa de fazer
-#dados$temp = NA
-#dados=dados[-122]
+dados$temp <- NA
+dados %<>% select(-temp)
+
 
 # Como criamos duas novas variaveis no banco de dados, vamos arrumar o dicionario
-cor = c("cor","Qual das opções abaixo melhor descreve como se vê em termos de etnia/cor?")
-tresid = c("tresid", "Anos de residencia em Belo Horizonte")
-sexo = c("sexo", "Sexo ao nascer")
-dicionario=rbind(dicionario,cor)
-dicionario=rbind(dicionario,tresid)
-dicionario=rbind(dicionario,sexo)
+Age = c("Idade","Qual a sua idade atual?")
+Median_Age = c("Dummy_Idade", "Sua idade é maior que a mediana de todas as idades?")
+quartil = c("Quartil_Idade", "Em qual quartil sua idade pertence?")
+Age_group <- c("grupo_etario", "Grupo etário quinquenal")
+Cohorts <- c("coorte", "Coorte de entrada na PG")
+dicionario=rbind(dicionario,Age, Median_Age,
+                 quartil, Age_group, Cohorts)
 dicionario=as.data.frame(dicionario)
 
 save(dicionario,file="dicionario.RData")
@@ -154,49 +116,45 @@ describe(dados)
 # Descrevendo variaveis qualitativas nominais
 
 # Tabela de Frequencia Absoluta de Cor/Etnia
-table(dados$cor) # tabulacao simples
-table(dados$cor, useNA="no") #useNA tem 3 opcoes: no, ifany, always
-table(dados$cor, useNA="always")
-addmargins(table(dados$cor)) #acrescenta o total ao final
+table(X11) # tabulacao simples
+table(X11, useNA="no") #useNA tem 3 opcoes: no, ifany, always
+table(X11, useNA="always")
+addmargins(table(X11)) #acrescenta o total ao final
 
 # Tabela de Frequencia Relativa de Cor/Etnia
-x=table(dados$cor)
+x=table(X11)
 prop.table(x) # esse comando calcula as proporcoes relativas
 addmargins(prop.table(x))
 
 # Agora vamos combinar tudo, construindo uma tabela completa
-#tabs = function(x){
-#  z = cbind(Fabs=addmargins(table(x)),
-#            Frel=round(addmargins(prop.table(table(x))),digits=2),
-#            FAcum=cumsum(round(addmargins(prop.table(table(x))),digits=2)))
-#  z[nrow(z),ncol(z)] <- NA
-#  return(z)
-#}
+tabs = function(x){
+  z = cbind(Fabs=addmargins(table(x)),
+            Frel=round(addmargins(prop.table(table(x))),digits=2),
+            FAcum=cumsum(round(addmargins(prop.table(table(x))),digits=2)))
+  z[nrow(z),ncol(z)] <- NA
+  return(z)
+}
+tabs(dados$Dummy_Idade)
 
-z = cbind(Fabs=addmargins(x),
-          Frel=round(addmargins(prop.table(x)),2),
-          FAcum=round(cumsum(addmargins(prop.table(x))),2))
-z[6,3] <- NA
-z
 
 # Analisando uma variavel qualitativa ordinal
 
-dicionario["X33",2]
-class(dados$X33)
-dados$X33
+dicionario %>% filter(`Codigo das variaveis` == "X10") %>% select(2)
+class(dados$X10)
+dados$X10
 
 # Probabilidade de area onde mora ser atingido por desastre
-likert_X33 <- c("Muito pouco provável",
-                "Pouco provável",
-                "Igualmente právavel",
-                "Provável",
-                "Muito provável")
+likert_X10 <- c("Discordo completamente",
+                "Discordo",
+                "Indiferente",
+                "Concordo",
+                "Concordo completamente")
 
 dados <- dados %>% 
-  mutate(`X33` = factor(`X33`,
-                        levels = likert_X33)) 
+  mutate(X10 = factor(dados$X10,
+                        levels = likert_X10)) 
 
-colsummary <- likert(as.data.frame(dados[,33]))
+colsummary <- likert(as.data.frame(dados[,10]))
 summary(colsummary)
 plot(colsummary)
 
