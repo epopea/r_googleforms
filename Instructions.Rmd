@@ -1,0 +1,68 @@
+---
+title: |
+ \textcolor[RGB]{34,139,34}{\textbf{Workshop on Integrating R and Google Forms}}
+author: |
+        | <font size="4">**Gilvan Guedes** (grguedes@epopea.com.br)</font>
+        | <font size="4">**Jeferson Andrade** (jeferson@epopea.com.br)</font>
+date: |
+      | Cedeplar, Universidade Federal de Minas Gerais
+      | 09 March 2020 - Belo Horizonte, Brazil
+output: pdf_document
+fontsize: 14pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Intructions for accessing the workshop project from EPOPEA Github
+
+Follow the steps above:
+
+* First, open RStudio on your computer as an administrator:
+
+  + If you are a Windows user, right click on RStudio and Select ``Open as administrator``
+  + If you are a Mac of Linux user:
+  
+    + Go to <tt>`Applications`</tt>
+    + Right click on RStudio and select <tt>`Show Package Contents`</tt>
+    + Go to Contents/MacOS
+    + Now open <tt>`Terminal`</tt> (in bash mode)
+    + Type <tt>`sudo`</tt> and drag the RStudio.exec into <tt>`Applications`</tt>
+    + Press on ENTER
+    
+* Then click on <tt>`File`</tt> $\rightarrow$ \texttt{New Project...} $\rightarrow$ \texttt{Version Control} $\rightarrow$ <tt>`Git`</tt>
+* In the first **text block** (Repository URL the following code) insert: <https://github.com/epopea/workshop.git>
+* The second **text block** will be automatically filled
+* In the thir **text block** select ``Browser`` and choose the folder where you want everything to be saved. In our case, we have chosen a folder where the Git was installed: <tt>`/Library/Developer/CommandLineTools/usr/share/git-core/perl/Git`</tt>
+* After choosing the sub-folder, just click on the button **Create Project**.
+
+Now you should be able to see the workshop folder loaded in the <tt>`Files`</tt> tab of RStudio
+
+* Click on the \texttt{R and Google Forms} folder
+* Click on the \texttt{Integrando Google Sheets com R.R} file to be loaded
+* Click on the \texttt{Organizando o Banco de Dados.R} file to be loaded
+* **Note**: If you want be able to change your working directory directly in RStudio, you should either:
+
+  + Open RStudio without administrator privileges and leaving the third **text block** as the default while creating the New Project
+  + Open RStudio with administrator privileges but choose, in the third **text block**, a folder that does not request the level of privilege as administrator, such as <tt>`/Users/grguedes/Documents`</tt>.
+  
+# Changing the working directory directly into RStudio
+
+If you want to change your working directory directly into R, you will type:
+
+* In \texttt{Windows}:
+
+```{r r1}
+#setwd("C:\\Users\\Usuário\\Downloads")
+```
+
+* In \texttt{Linux} or \texttt{MacOS}:
+
+```{r r2}
+#setwd("/Users/grguedes/Documents/")
+```
+
+Just remember to remove the \texttt{$\#$} symbol before the command so it will be activated.
+
+Now, sit, relax and enjoy the Workshop!
