@@ -1,0 +1,34 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\begin{frame}
+  \frametitle{Incluindo páginas de PDFs externos}
+
+  \begin{block}{Incluir (páginas de) PDFs externos é útil}
+    \begin{itemize}
+    \item capa/folha de rosto
+    \item ficha catalográfica
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{}
+    \begin{itemize}
+    \item preâmbulo: \texttt{\purple{\string\usepackage}\green{\ac
+          pdfpages\fc}}\\\ 
+    % \item Para incluir a primeira página\\
+    %   \texttt{\purple{\string\includepdf}\red{\textit{\ac{}arquivo-pdf\fc{}}}}
+      
+    \item Para incluir páginas específicas\\
+      (ex.: p.~1, uma página em branco e pp.~2 a 5)\\
+      \texttt{\purple{\string\includepdf}\brown{[pages=\ac{}1,\ac{}\fc{},2-5\fc{}]}\red{\textit{\ac{}arquivo-pdf\fc{}}}}
+    \item Para incluir todas as páginas
+      \texttt{\purple{\string\includepdf}\brown{[pages=-]}\red{\textit{\ac{}arquivo-pdf\fc{}}}}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

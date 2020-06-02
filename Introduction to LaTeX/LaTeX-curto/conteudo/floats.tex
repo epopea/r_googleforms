@@ -1,0 +1,159 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Inserindo imagens}
+
+\begin{frame}
+  \frametitle{Inserindo imagens}
+  
+  \begin{block}{}
+    \ttfamily\blue{\string\usepackage}\ac\purple{graphic\underline{x}}\fc\quad
+    \gray{\textit{\pc\ no cabeçalho}}\\
+    \medskip\par
+    \blue{\string\includegraphics}\brown{[ajustes]}\ac{}\purple{\textit{arquivo}}\fc{}
+
+  \end{block}
+
+  \begin{block}{Principais ajustes}
+    \begin{itemize}
+    \item \brown{\texttt{scale=\textit{número}}} redimensionar a imagem
+    \item \brown{\texttt{width=\textit{tamanho}}} comprimento
+    \item \brown{\texttt{height=\textit{tamanho}}} altura
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exemplo de inserção}
+
+   \texttt{\blue{\string\includegraphics}\brown{[width=2cm]}\purple{\ac{}smiley.pdf\fc{}}}
+\qquad
+      \raisebox{-0.5\height}{\imagem[width=1.5cm]{smiley.pdf}}
+
+\bigskip
+
+  \begin{block}{Tipos de arquivos possíveis de incluir}
+    \begin{itemize}
+    \item pdf
+    \item jpg
+    \item png
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\section{Figuras}
+
+% \begin{frame}
+%   \frametitle{Exemplo de tabelas}
+
+%   \begin{exemplo}
+
+%     \begin{columns}[c]
+%       \column{6cm}
+%       \texttt{\blue{\string\begin\ac{}tabular\fc{}}\redunder{\ac{}|c|r|l|\fc{}}\\
+%           \ \ \green{\string\hline}\\
+%           \ \ a\ \ \ \red{\et}\ bb\ \ \red{\et}\ ccc\ \purple{\bs\bs}\ \green{\string\hline}\\
+%           \ \ bb\ \ \red{\et}\ ccc\ \red{\et}\ a\ \ \ \purple{\bs\bs}\ \green{\string\hline}\\
+%           \ \ ccc\ \red{\et}\ a\ \ \ \red{\et}\ bb\ \ \purple{\bs\bs}\ \green{\string\hline}\\
+%           \blue{\string\end\ac{}tabular\fc{}}}
+%       \column{3cm}
+%       \begin{tabular}{|c|r|l|}
+%         \hline
+%         a   & bb  & ccc \\\hline
+%         bb  & ccc & a   \\\hline
+%         ccc & a   & bb   \\\hline
+%       \end{tabular}
+%     \end{columns}
+
+%   \end{exemplo}
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Figuras e tabelas}
+
+  \begin{block}{Elementos ``flutuantes''}
+    \begin{itemize}
+    \item figuras ou tabelas
+    \item podem ser grandes\\
+      $\to$ isto dificulta seu posicionamento na página
+    \item $\therefore$ figuras e tabelas podem \green{deslocar-se na
+        página}\\
+      $\to$ são \purple{flutuantes}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Figuras}
+
+  \begin{block}{Elementos das figuras (ambiente \texttt{figure})}
+    \medskip
+%    \begin{figure}[posição]
+%
+%      (conteúdo da figura)
+%
+%      \caption{legenda}
+%      \label{fig: label}
+%    \end{figure}
+    \blue{\texttt{\string\begin\ac{}figure\fc{}\brown{[lista-de-posições]}\
+          \ \gray{\small\textit{\% pos:\ h,t,b,p}}}\\[2mm]
+    \ \ \ \ \ }\red{\textbf{(conteúdo\ da\ figura)}}\\[2mm]
+    \texttt{\ \ \purple{\string\caption\ac{}\textit{Legenda}\fc{}}\\
+     \ \ \ \ \gray{\textit{\% \string\label{} SEMPRE depois do
+        \string\caption{} !!}}\\
+    \ \ \purple{\string\label\ac{}\textit{fig:\ label}\fc{}}\\
+    \blue{\string\end\ac{}figure\fc{}}}
+    \medskip
+  \end{block}
+
+\begin{block}{Posições}
+  \begin{description}
+  \item[h] = here = aqui
+  \item[t] = top = topo da página
+  \item[b] = bottom = pé da página
+  \item[p] = page = em página separada
+  \end{description}
+\end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo de figura (inserindo imagem)}
+
+  \begin{exemplo}
+    \medskip
+    \quad
+    \begin{minipage}{10cm}
+    \texttt{\purple{\string\usepackage}\blue{\ac{}graphicx\fc}
+      \qquad
+      \gray{\pc\ no preâmbulo}}
+    \bigskip
+    
+    \begin{ttfamily}\small
+        \green{\string\begin\ac{}figure\fc{}}\red{[hb]}\\
+          \mbox{}\ \ \purple{\string\centering}\\
+          \mbox{}\ \ \blue{\string\includegraphics}\brown{[width=2cm]}\purple{\ac{}smiley.pdf\fc{}}\\
+          \mbox{}\ \ \purple{\string\caption}\brown{\ac{}Sorria,\ você\ NÃO\ está\ sendo\ filmado.\fc{}}\\
+          \mbox{}\ \ \purple{\string\label}\brown{\ac{}fig:\ sorria\fc{}}\\
+          \green{\string\end\ac{}figure\fc{}}
+      \end{ttfamily}
+    \end{minipage}
+    
+    \begin{figure}[hb]
+      \centering
+      \imagem[width=1.5cm]{smiley.pdf}
+      \caption{Sorria, você NÃO está sendo filmado.}
+      \label{fig:smiley}
+    \end{figure}
+
+  \end{exemplo}
+
+\end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

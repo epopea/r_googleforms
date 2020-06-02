@@ -1,0 +1,69 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\part{Formatação}
+
+\begin{frame}
+\frametitle{Mudando formatação}
+
+  \begin{block}{Estilo de fontes}\small\medskip
+
+    \begin{tabular}{l|l|p{4.5cm}}
+      \green{Comando} & \green{Declaração} & \green{Efeito} \\
+      \texttt{\blue{\string\textbf}\red{\ac\black{...}\fc}} & \texttt{\red{\ac}\blue{\string\bfseries}...\red{\fc}} &\rmfamily\bfseries negrito\\
+      \texttt{\blue{\string\textit}\red{\ac\black{...}\fc}} & \texttt{\red{\ac}\blue{\string\itshape}...\red{\fc}} &\rmfamily\itshape itálico\\
+      \texttt{\blue{\string\textsc}\red{\ac\black{...}\fc}} &
+      \texttt{\red{\ac}\blue{\string\scshape}...\red{\fc}} &\rmfamily\scshape Versalete (Small Caps)\\
+    \end{tabular}
+  \end{block}
+
+  \begin{block}{Tamanho das fontes}\bigskip
+
+    \begin{tabular}{p{4cm}p{4.5cm}}
+      \green{Declaração} & \green{Efeito} \\
+      % \texttt{\red{\ac}\blue{\string\tiny} ...\red{\fc}} & \tiny Texto \\
+      % \texttt{\red{\ac}\blue{\string\scriptsize} ...\red{\fc}} & \scriptsize Texto \\
+      % \texttt{\red{\ac}\blue{\string\footnotesize} ...\red{\fc}} & \footnotesize Texto \\
+      \texttt{\red{\ac}\blue{\string\small} ...\red{\fc}} & \small Texto \\
+      % \texttt{\red{\ac}\blue{\string\normalsize} ...\red{\fc}} & \normalsize Texto \\
+      \texttt{\red{\ac}\blue{\string\large} ...\red{\fc}} & \large Texto \\
+      \texttt{\red{\ac}\blue{\string\Large} ...\red{\fc}} & \Large Texto \\
+      \texttt{\red{\ac}\blue{\string\LARGE} ...\red{\fc}} & \LARGE Texto \\
+      % \texttt{\red{\ac}\blue{\string\huge} ...\red{\fc}} & \huge Texto \\
+      % \texttt{\red{\ac}\blue{\string\Huge} ...\red{\fc}} & \Huge Texto
+    \end{tabular}
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Formatação e grupos}
+
+  \begin{itemize}
+  \item Grupos (texto entre chaves)\\
+    limitam o escopo de comandos de formatação.\medskip
+
+  \item Toda formatação definida em um grupo\\
+    perde o efeito ao final do grupo
+  \end{itemize}\medskip
+  %\pause
+
+  \begin{exemplo}\medskip
+    \begin{tabular}[c]{p{7cm}p{3cm}}
+      \green{fonte} & \green{efeito} \\
+      \texttt{%
+        \small aaa\ \purple{\ac{}}\blue{\string\Large\string\itshape\ bbb}\purple{\fc{}}\ ccc}
+                    &
+                      \rmfamily
+      aaa {\Large\itshape bbb} ccc
+    \end{tabular}
+  \end{exemplo}
+
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

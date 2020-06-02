@@ -1,0 +1,76 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Comandos}
+
+
+\begin{frame}
+  \frametitle{Comandos}
+
+  \begin{block}{Definindo comandos}
+    %\centering
+    \texttt{\mbox{\ \ }\blue{\string\newcommand}\ac{}\red{\textit{\string\comando}}\fc{}\purple{[\textit{nº args}]}\ac{}\textit{substituição}\fc{}}\\
+
+    \begin{itemize}
+    \item \texttt{\#1} --- primeiro parâmetro
+    \item \texttt{\#2} --- segundo parâmetro
+    \item \dots
+    \end{itemize}
+
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplos}
+
+  \begin{exemplo}[comando sem argumento]
+    \medskip\par
+    \texttt{\blue{\string\newcommand}\ac{}\green{\string\R}\fc{}\ac{}\purple{\string\mathbb\ac{}R\fc{}}\fc{}}\medskip
+
+  % Define o comando sem parâmetros\smallskip
+
+  %   \centerline{\texttt{\string\R} $\to$ \texttt{\string\mathbb\ac{}R\fc{}}}
+
+    \bigskip
+
+    \texttt{Seja\ \dolar{}a\string\in\green{\string\R}\dolar{}\ tal\ que\ ...}\smallskip
+
+    \newcommand{\R}{\mathbb{R}}
+    Seja $a\in\R$ tal que ...
+  \end{exemplo}
+
+\end{frame}
+
+
+\newcommand{\V}[1]{(#1_1,#1_2)}
+
+\begin{frame}
+  \frametitle{Exemplos}
+
+  \begin{exemplo}[comando com 1 argumento]
+    Suponha que se use muitas vezes o par $(x_1,x_2)$, $(y_1,y_2)$,
+    $(k_1,k_2)$ etc.
+    \medskip 
+
+    \texttt{\blue{\string\newcommand}\ac{}\green{\string\V}\fc\red{[1]}\ac{}{(\purple{\#1}\us{}1,\purple{\#1}\us{}2})\fc{}}\medskip
+
+    
+    \bigskip
+
+    \texttt{...\ considere o vetor \dolar{}\green{\string\V}\purple{\ac\string\theta\fc}\dolar{}\
+       ...}\smallskip
+
+    
+     \dots{} considere o vetor $\V{\theta}$ \dots
+  \end{exemplo}
+\end{frame}
+
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

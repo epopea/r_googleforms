@@ -1,0 +1,506 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\part{Modo Matemático}
+
+
+\begin{frame}
+  \frametitle{Estilos principais do modo matemático}
+ 
+  \begin{block}{Estilo em linha}% ( = \texttt{\string\textstyle})
+    A fórmula fica misturada ao texto na mesma linha.
+  \end{block}
+    \begin{exemplo}[]
+      Seja $f(x) =\int_0^x \frac{\sen x}{x} dx$ a área \dots
+    \end{exemplo}
+    
+    \medskip
+
+
+  \begin{block}{Estilo em destaque}% ( = \texttt{\string\displaystyle})
+    A fórmula se separa do texto, centralizada e com mais espaço.
+  \end{block}
+  \begin{exemplo}
+    Seja
+    \[
+    f(x) =\int_0^x \frac{\sen x}{x} dx
+    \] a área \dots
+  \end{exemplo}
+  
+
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Modo matemático}
+
+  \begin{block}{Estilo em linha}
+
+    \begin{itemize}
+    \item \texttt{\blue\$ ...\ \blue\$}
+    \item \texttt{\blue{\string\(} ...\ \blue{\string\)}}
+    \end{itemize}
+
+  \end{block}
+
+    \begin{exemplo}
+        \texttt{A fórmula de Euler, dada por \blue{\dolar
+          e\^{}\ac{}i\string\pi\fc{} + 1 = 0\dolar},\\ é considerada uma das
+          mais bonitas fórmulas matemáticas.}
+
+        \bigskip\hrule\bigskip
+
+        A fórmula de Euler, dada por \blue{$e^{i\pi}+1=0$}, é considerada uma das
+          mais bonitas fórmulas matemáticas.
+    \end{exemplo}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modo matemático}
+
+  \begin{block}{Estilo destaque SEM numeração}
+    \begin{itemize}
+    \item \texttt{\blue{\string\[} ...\ \blue{\string\]}}
+    \item \texttt{\blue{\string\begin\ac{}equation*\fc{}}\ ...\ \blue{\string\end\ac{}equation*\fc{}}}
+    \end{itemize}
+  \end{block}
+
+\begin{exemplo}
+  \texttt{A fórmula de Euler é dada por\\
+  \blue{\string\[\\
+  \mbox{}\ \ e\^{}\ac{}i\string\pi\fc{} + 1 = 0.\\
+  \string\]}}
+
+  \bigskip\hrule\bigskip
+
+  A fórmula de Euler é dada por
+  \[ \blue{e^{i\pi} + 1 = 0.}\]\smallskip
+\end{exemplo}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Modo matemático}
+  \begin{block}{Modo destaque COM numeração}
+    \begin{itemize}
+    \item \texttt{%\begin{equation} ... \end{equation}
+        \blue{\string\begin\ac{}equation\fc{}}\ ...\ \blue{\string\end\ac{}equation\fc{}}}
+%    \item equações de várias linhas
+    \end{itemize}
+  \end{block}
+
+\begin{exemplo}
+  \texttt{A fórmula de Euler é dada por\\
+    \blue{\string\begin\ac{}equation\fc{}} \purple{\string\label\ac{}\underline{eq:\ euler}\fc{}}\\
+      \mbox{}\ \  \blue{e\^{}\ac{}i\string\pi\fc{} + 1 = 0.}\\
+      \blue{\string\end\ac{}equation\fc{}}\\
+    ... Ver \purple{\string\eqref\ac{}\underline{eq:\ euler}\fc}.}
+
+  \medskip\hrule\medskip
+
+  A fórmula de Euler é dada por\blue{%
+  \begin{equation} \label{eq: euler}
+    e^{i\pi} + 1 = 0.
+  \end{equation}}
+  ... Ver \eqref{eq: euler}.
+\end{exemplo}
+\end{frame}
+
+
+\section{Símbolos}
+
+\begin{frame}
+  \frametitle{Elementos simples}
+
+  \begin{block}{Elementos simples}
+    \begin{tabular}{lll}
+      \green{Tipo} & \green{\TeX\ (modo matem.)} & \green{PDF} \\ %\hline
+      Letras latinas & \blue{\tt a b x y z A B X Y} & $a b x y z A B X Y$\\
+      %\hline
+      Letras gregas minúsc. & \blue{\tt\string\alpha\ \string\delta} & $\alpha
+      \delta$ \\ %\hline
+      Letras gregas maiúsc. & \blue{\tt\string\Omega\ \string\Delta} & $\Omega
+      \Delta$ \\ %\hline
+      Outros símbolos & \blue{\tt\string\infty\ \string\exists}
+      &$\infty\exists$\\%\hline
+      & \blue{\texttt{\string\varnothing}} & $\varnothing$
+    \end{tabular}
+  \end{block}
+
+
+\bigskip
+
+  Mais:
+
+  \begin{itemize}
+  \item Apostila \LaTeX{} de A a B, p.\ 39.
+  \item Compreensive \LaTeX\ symbols list (CTAN) \texttt{symbols-a4.pdf}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ops...}
+
+  \begin{alertblock}{Modo matemático não é itálico!}
+
+    \centering
+
+    \imagem[clip,scale=0.5,bb=140 665 460 720]{diferente1.pdf}
+
+    \medskip\hrule\medskip
+
+    \imagem[clip,scale=0.5,bb=140 665 460 720]{diferente2.pdf}
+
+  \end{alertblock}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Relações binárias}
+  \begin{block}{Relações binárias}
+    \centering
+    \begin{tabular}{lcllcllc}
+      \blue{\texttt{\string=}} & $=$ &&
+      \blue{\texttt{\string\neq}} & $\neq$ &&
+      \blue{\texttt{\string\approx}} & $\approx$ \\
+      \blue{\texttt{\string<}} & $<$ &&
+      \blue{\texttt{\string>}} & $>$ &&
+      \blue{\texttt{\string\in}} & $\in$ \\
+      \blue{\texttt{\string\leq}} & $\leq$ &&
+      \blue{\texttt{\string\geq}} & $\geq$ &&
+      \blue{\texttt{\string\not\string\in}} & $\not\in$ \\
+      \blue{\texttt{\string\subset}} & $\subset$ &&
+      \blue{\texttt{\string\supset}} & $\supset$ &&
+      \blue{\texttt{\string\perp}} & $\perp$
+    \end{tabular}
+  \end{block}
+
+  \begin{block}{Operadores binários}
+    \centering
+    \begin{tabular}{llllllll}
+      \blue{\texttt{\string\pm}} & $\pm$ &&
+      \blue{\texttt{\string\times}} & $\times$ &&
+      \blue{\texttt{\string\div}} & $\div$ \\
+      \blue{\texttt{\string\cap}} & $\cap$ &&
+      \blue{\texttt{\string\cup}} & $\cup$ &&
+      \blue{\texttt{\string\cdot}} & $\cdot$ 
+    \end{tabular}
+  \end{block}
+
+\bigskip
+
+  Mais:
+
+  \begin{itemize}
+  \item Apostila \LaTeX{} de A a B, p.\ 38.
+  \item Compreensive \LaTeX\ symbols list (CTAN) \texttt{symbols-a4.pdf}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+   \frametitle{Delimitadores}
+  \begin{block}{Delimitadores}
+    \centering
+    \begin{tabular}{lcllc}
+      \blue{\texttt{( )}} & $\bigl(\,\bigr)$ &&
+      \blue{\texttt{[ ]}} & $\bigl[\, \bigr]$ \\[2mm]
+      \blue{\texttt{\string| \string|}} & $\bigl|\,\bigr|$ &&
+      \blue{\texttt{\string\| \string\|}} & $\bigl\|\, \bigr\|$ \\[2mm]
+      \blue{\texttt{\string\langle\ \string\rangle}} & $\bigl\langle\,\bigr\rangle$ &&
+      \blue{\texttt{\string\lbrace\ \string\rbrace}} & $\bigl\lbrace\,\bigr\rbrace$
+    \end{tabular}
+  \end{block}
+
+  \def\x{\dfrac12}
+
+  \begin{block}{Tamanhos \hfill (obs: \texttt{\string\x} = \texttt{\string\dfrac12})}
+    \centering
+    \begin{tabular}{lcllc}
+      \blue{\texttt{(\ \black{\string\x}\ )}} & $( \x )$ &&
+      \blue{\texttt{\string\left(\ \black{\string\x}\ \string\right)}} & $\left( \x \right)$  \\
+      \blue{\texttt{\string\bigl(\ \black{\string\x}\ \string\bigr)}} & $\bigl( \x \bigr)$ &&
+      \blue{\texttt{\string\Bigl(\ \black{\string\x}\ \string\Bigr)}} & $\Bigl( \x \Bigr)$ \\
+      \blue{\texttt{\string\biggl(\ \black{\string\x}\ \string\biggr)}} & $\biggl( \x \biggr)$ &&
+      \blue{\texttt{\string\Biggl(\ \black{\string\x}\ \string\Biggr)}} & $\Biggl( \x \Biggr)$
+    \end{tabular}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fontes matemáticas}
+  \begin{block}{Caligráficas}
+    \texttt{\blue{\string\mathcal}\ac{}\textit{letra}\fc}
+    \[
+    \mathcal{A}\,\mathcal{B}\,\mathcal{C}\,\mathcal{D}\,\mathcal{E}\,\mathcal{F}\,\mathcal{G}\,\mathcal{H}\,\mathcal{I}\,\mathcal{J}\,\mathcal{K}\,\mathcal{L}\,\mathcal{M}\,\mathcal{N}\,\mathcal{O}\,\mathcal{P}\,\mathcal{Q}\,\mathcal{R}\,\mathcal{S}\,\mathcal{T}\,\mathcal{U}\,\mathcal{V}\,\mathcal{W}\,\mathcal{X}\,\mathcal{Y}\,\mathcal{Z}
+    \]
+  \end{block}
+
+  \begin{block}{Blackboard Bold \hfill(\texttt{\string\usepackage\ac{}amssymb\fc{}})}
+    \texttt{\blue{\string\mathbb}\ac{}\textit{letra}\fc}
+    \[
+    \mathbb{A}\,\mathbb{B}\,\mathbb{C}\,\mathbb{D}\,\mathbb{E}\,\mathbb{F}\,\mathbb{G}\,\mathbb{H}\,\mathbb{I}\,\mathbb{J}\,\mathbb{K}\,\mathbb{L}\,\mathbb{M}\,\mathbb{N}\,\mathbb{O}\,\mathbb{P}\,\mathbb{Q}\,\mathbb{R}\,\mathbb{S}\,\mathbb{T}\,\mathbb{U}\,\mathbb{V}\,\mathbb{W}\,\mathbb{X}\,\mathbb{Y}\,\mathbb{Z}
+    \]
+  \end{block}
+
+  \begin{block}{Double Stroke \hfill(\texttt{\string\usepackage\ac{}dsfont\fc{}})}
+    \texttt{\blue{\string\mathds}\ac{}\textit{letra}\fc}
+    \[
+    \mathds{A}\,\mathds{B}\,\mathds{C}\,\mathds{D}\,\mathds{E}\,\mathds{F}\,\mathds{G}\,\mathds{H}\,\mathds{I}\,\mathds{J}\,\mathds{K}\,\mathds{L}\,\mathds{M}\,\mathds{N}\,\mathds{O}\,\mathds{P}\,\mathds{Q}\,\mathds{R}\,\mathds{S}\,\mathds{T}\,\mathds{U}\,\mathds{V}\,\mathds{W}\,\mathds{X}\,\mathds{Y}\,\mathds{Z}
+    \]
+  \end{block}
+
+\end{frame}
+
+\section{Construções}
+
+\begin{frame}
+  \frametitle{Índices e expoentes}
+
+  \begin{block}{Índices e expoentes}
+    \centering
+    \begin{tabular}{llllll}
+      \blue{\texttt{x\^{}2}} & $x^2$ &&&
+      \blue{\texttt{x\us n}} & $x_n$ \\
+      \blue{\texttt{x\^{}2\us n}} & $x_n^2$ &&&
+      \blue{\texttt{x\us\ac{}n\us k\fc}} & $x_{n_k}$ \\
+      \blue{\texttt{x\us n\us k}} & \alert{erro}
+    \end{tabular}
+  \end{block}
+
+  \begin{block}{Somatórios e integrais}
+    \texttt{\blue{\string\sum}\green{\us\ac{}i=1\fc}\purple{\^{}\string\infty{}}
+      \string\frac\ac{}1\fc{}\ac{}n\^{}2\fc{}\ =
+      \string\frac\ac{}\string\pi\^{}2\fc{}\ac{}6\fc{}}
+%    \vspace{-3mm}
+    \[\sum_{i=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\]
+%\vspace{-2mm}
+
+\hrule\medskip
+
+    \texttt{\blue{\string\int}\green{\us{}0}\purple{\^{}\string\pi}\ \string\sen\ x\string\,dx
+      = 2}
+    %\vspace{-3mm}
+    \[\int_0^\pi \sen x\,dx=2\]
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Frações}
+
+  \begin{block}{\texttt{\string\frac\ac{a}\fc\ac{b}\fc}}
+    \begin{columns}
+      \column{1cm}
+      \texttt{%\frac{a}{b}
+        \blue{\string\frac}\ac{}\textit{a}\fc{}\ac{}\textit{b}\fc{}}
+      \column{5cm}
+      \begin{tabular}{lcllc}
+        Estilo em linha &&  $\frac ab$ \\[2mm]
+        Estilo destaque &&  $\dfrac ab$
+      \end{tabular}
+    \end{columns}
+
+  \end{block}
+
+
+  \begin{block}{Forçando modo}
+
+    \begin{itemize}
+    \item \blue{\texttt{\string\tfrac}} $\to$ fração estilo em linha
+      \quad\gray{\small(t $\to$ \texttt{\bs \underline{t}extstyle})}
+    \item \blue{\texttt{\string\dfrac}} $\to$ fração estilo destaque
+      \quad\gray{\small(d $\to$ \texttt{\bs \underline{d}isplaystyle})}
+    \end{itemize}
+
+  \end{block}
+
+  \begin{exemplo}\centering
+    \texttt{\string\[\ \string\int\ \blue{\string\frac\ac{}1\fc{}\ac{}x\fc{}}\ dx\ =\string\int\ \green{\string\tfrac\ac{}1\fc{}\ac{}x\fc{}}\ dx\ \string\]}
+    \medskip\hrule
+    \[ \int \blue{\frac{1}{x}} dx = \int \green{\tfrac{1}{x}} dx \]
+  \end{exemplo}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Raízes}
+
+  \begin{block}{Raízes}
+    \centering
+    \begin{tabular}{lcllc}
+      \texttt{\blue{\string\sqrt}\ac{}x\fc{}} &&  $\sqrt x$ \\[2mm]
+      \texttt{\blue{\string\sqrt}\red{[3]}\ac{}x\fc{}} &&  $\sqrt[3]{x}$
+    \end{tabular}
+
+  \end{block}
+
+    \begin{exemplo}
+      \texttt{%\sqrt{3-2\sqrt2} = \sqrt2-1
+        \string\sqrt\ac{}3-2\string\sqrt2\fc{}\ =\ \string\sqrt2-1}
+      \medskip\hrule\medskip
+      \[\sqrt{3-2\sqrt2} = \sqrt2-1 \]
+    \end{exemplo}
+
+\end{frame}
+
+\begin{frame}
+  \setbeamercovered{transparent=0}
+
+  \frametitle{Funções, limites, \dots}
+
+  \begin{block}{Funções, limites, \dots}
+    \centering
+    \begin{tabular}{llllllll}
+      \blue{\texttt{\string\cos}} & $\cos$ &&
+      \blue{\texttt{\string\sin}} & $\sin$ &&
+      \blue{\texttt{\string\tan}} & $\tan$ \\
+      \blue{\texttt{\string\det}} & $\det$ &&
+      \blue{\texttt{\string\log}} & $\log$ &&
+      \blue{\texttt{\string\exp}} & $\exp$
+    \end{tabular}
+  \end{block}
+
+  \begin{alertblock}{\texttt{\string\sen} não existe!}
+    \texttt{\purple{\string\newcommand}\ac{}\blue{\string\sen}\fc{}\ac{}\green{\string\operatorname}\ac{}sen\fc{}\fc{}}
+  \end{alertblock}
+
+  \begin{exemplo}
+    %\lim_{x\to 0} \frac{\sen x}{x} = 1
+    \texttt{\string\lim\us\ac{}x\string\to\ 0\fc{}\
+      \string\frac\ac{}\blue{\string\sen}\ x\fc{}\ac{}x\fc{}\ =\ 1}
+
+    \medskip\hrule\medskip
+    \[\lim_{x\to 0} \frac{\sen x}{x} = 1\]
+  \end{exemplo}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Matrizes}
+
+  \begin{exemplo}
+    \begin{columns}[c]
+      \column{4cm}{\ttfamily
+%      \begin{pmatrix}
+%         1 & 2 & 3 \\
+%        -1 & 0 & 5 \\
+%         0 & 3 & 4
+%      \end{pmatrix}
+        \blue{\string\begin\ac{}pmatrix\fc{}}\\
+          \ \ \ 1\ \red{\et}\ 2\ \red{\et}\ 3\ \purple{\bs\bs}\\
+          \ \ -1\ \red{\et}\ 0\ \red{\et}\ 5\ \purple{\bs\bs}\\
+          \ \ \ 0\ \red{\et}\ 3\ \red{\et}\ 4\\
+        \blue{\string\end\ac{}pmatrix\fc{}}}
+      \column{3cm}
+      \[
+      \begin{pmatrix}
+         1 & 2 & 3 \\
+        -1 & 0 & 5 \\
+         0 & 3 & 4
+      \end{pmatrix}
+      \]
+    \end{columns}
+  \end{exemplo}
+
+
+  \begin{exemplo}
+    {\small
+    \texttt{Seja\ \dolar{}A=\brown{\string\left(}\blue{\string\begin\ac{}smallmatrix\fc{}}\\
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \red{\et}\ 1\ \purple{\bs\bs} -1\ \red{\et}\ 0\\
+    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \blue{\string\end\ac{}smallmatrix\fc{}}\brown{\string\right)}\dolar{}\ a\ matriz...}}
+
+    \medskip\hrule\medskip
+
+    Seja \blue{$A=\left(\begin{smallmatrix}
+        0 & 1 \\ -1 & 0
+      \end{smallmatrix}\right)$} a matriz...    
+  \end{exemplo}
+
+\end{frame}
+
+\section{Fórmulas de várias linhas}
+
+%\setcounter{equation}{0}
+
+\begin{frame}
+  \frametitle{Ambientes de várias linhas}
+
+
+  \begin{block}{Alinhado}
+      \texttt{%
+%       \begin{align}
+%         a_1 & = b_1 + c_1 \label{eq1}\\
+%         a_2 & = b_2 + c_2
+%                -d_2 + e_2 \nonumber
+%       \end{align}
+    \ \ \ \blue{\string\begin\ac{}align\fc{}}\\
+    \ \ \ \ \ a\us{}1\ \red{\et}{}\ =\ b\us{}1\ +\ c\us{}1\
+    \purple{\string\label\brown{\ac{}eq:\ align\fc{}}}\ \red{\bs\bs}{}\\
+    \ \ \ \ \ a\us{}2\ \red{\et}{}\ =\ b\us{}2\ +\ c\us{}2\\
+    \ \ \ \ \ \ \ \ \ \ \ \ -d\us{}2\ +\ e\us{}2\ \green{\string\nonumber}\\
+    \ \ \ \blue{\string\end\ac{}align\fc{}}\\
+    \ \ \ Segue da equação \purple{\string\eqref{\brown{\ac{}eq:\
+          align\fc}}} ...}
+
+\medskip\hrule
+
+      \begin{align}
+        a_1 &= b_1 + c_1 \label{eq: align} \\
+        a_2 &= b_2 + c_2
+              -d_2 + e_2 \nonumber
+      \end{align}
+      Segue da equação \eqref{eq: align} \dots
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ambientes de várias linhas}
+  \begin{block}{Centralizado}
+      \texttt{%
+%       \begin{gather}
+%         a_1 & = b_1 + c_1 \label{eq1}\\
+%         a_2 & = b_2 + c_2
+%                -d_2 + e_2 \nonumber
+%       \end{gather}
+    \ \ \ \blue{\string\begin\ac{}gather\fc{}}\\
+    \ \ \ \ \ a\us{}1\ =\ b\us{}1\ +\ c\us{}1\
+    \purple{\string\label\brown{\ac{}eq:\ gather\fc{}}}\ \red{\bs\bs}{}\\
+    \ \ \ \ \ a\us{}2\ =\ b\us{}2\ +\ c\us{}2\\
+    \ \ \ \ \ \ \ \ \ \ -d\us{}2\ +\ e\us{}2\ \green{\string\nonumber}\\
+    \ \ \ \blue{\string\end\ac{}gather\fc{}}\\
+    \ \ \ Segue da equação \purple{\string\eqref{\brown{\ac{}eq:\
+          gather\fc}}} ...}
+
+\medskip\hrule
+
+      \begin{gather}
+        a_1 = b_1 + c_1 \label{eq: gather} \\
+        a_2 = b_2 + c_2
+              -d_2 + e_2 \nonumber
+      \end{gather}
+      Segue da equação \eqref{eq: gather} \dots
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Numeração e referência}
+
+  \begin{block}{Numero ou não?}
+    \centering
+    \begin{tabular}{lll}
+      \green{COM numeração} && \green{SEM numeração}\\ %\hline
+      \blue{\texttt{equation}} && \blue{\texttt{equation\purple{*}}} \\
+      \blue{\texttt{align}} && \blue{\texttt{align\purple{*}}} \\
+      \blue{\texttt{gather}} && \blue{\texttt{gather\purple{*}}}
+    \end{tabular}
+  \end{block}
+
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 
