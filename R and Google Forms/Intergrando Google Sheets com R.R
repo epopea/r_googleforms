@@ -66,8 +66,6 @@ dicionario <- bind_cols("Codigo das variaveis" = names,
 # Mudando o nome das colunas para código das variáveis
 names(dados) <- names
 
-
-
 #---------------------------------#
 # ORGANIZANDO OS DADOS IMPORTADOS #
 #---------------------------------#
@@ -85,7 +83,7 @@ View(dados)
 
 # Salvando os objetos criados ate agora na sua pasta
 
-setwd("/Volumes/users/epopea/Dropbox/Workshops/") # define onde vai ser salvo
+#setwd("/Volumes/users/epopea/Dropbox/Workshops/") # define onde vai ser salvo
 
 getwd() # checa se o diretorio mudou corretamente
 
