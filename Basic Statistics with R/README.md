@@ -1,3 +1,3 @@
-This folder contains two booklets on how to use R and R Studio for beginners. It also includes basic descriptive statistics and hypothesis testing applied to R.
+This folder contains three booklets on how to use R and R Studio for beginners and persons interested in basic applied statistics. It also includes descriptive statistics, hypothesis testing and linear regression analysis applied to R.
 
-The hypothesis testing includes basic non-parametric and parametric tests, along with tables with values for the corresponding theoretical distributions.
+The hypothesis testing includes selected non-parametric and parametric tests, along with tables with values for the corresponding theoretical distributions.
