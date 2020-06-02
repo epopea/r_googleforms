@@ -1,0 +1,29 @@
+---
+title: "Instructions"
+author: "Jeferson and Gilvan"
+date: "01/06/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intructions for accessing the workshop project from Github
+
+* First open RStudio
+* Then click on File > New Project... > Version Control > Git 
+* Insert in the first text block (Repository URL the following code: <https://github.com/epopea/workshop.git>
+* The second text block will be automatically filled
+ Just click on the button *Create Project**.
+
+Now you should be able to see the workshop folder loaded in the Files tab of RStudio 
+* Click on the `R and Google Forms` folder
+* Click on the `Integrando Google Sheets com R.R` file
+* Click on the `Organizando o Banco de Dados.R` file
+* Finally set up your working directory as in the following code:
+
+
+```{r r1}
+#setwd("C:\\Users\\Usuário\\Downloads")
+```
