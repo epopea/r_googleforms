@@ -1,0 +1,72 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Dividindo}
+
+\begin{frame}
+  \frametitle{Dividindo o documento em arquivos}
+
+  \begin{itemize}
+  \item documentos grandes são divididos em capítulos e seções
+  \item é mais complicado lidar com arquivos de texto muito grandes
+  \item pode-se dividir o documento em partes,\\
+    cada parte em arquivos separados.
+  \end{itemize}
+
+  \begin{block}{Incluir com \texttt{\string\input}}
+    \medskip
+    \texttt{\blue{\string\input}\purple{\ac{}arquivo\fc{}}\qquad 
+      \gray{\pc\ \itshape não colocar a extensão .tex}}
+    \medskip
+    \begin{itemize}
+    \item inclui o conteúdo do
+      \purple{\texttt{\textit{arquivo}.tex}}\\
+      como se este estivesse digitado ali.
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo de dissertação típica}
+
+  \begin{exemplo}
+%    \documentclass[12pt]{report}
+%    ... % preâmbulo
+%    \begin{document}
+%    \input{capa}
+%    \input{folharosto}
+%    \tableofcontents
+%    \input{intro}         % cap. Introdução
+%    \input{teoria}        % cap. Teoria
+%    \input{aplicacoes}    % cap. Aplicações
+%    \input{intro}    \ \ \ \ \ \ \ \ \ \gray{\textit{\%\ cap.\ Introdução}}
+%    \input{teoria}    \ \ \ \ \ \ \ \ \gray{\textit{\%\ cap.\ Teoria}}
+%    \input{aplicacoes}    \ \ \ \ \gray{\textit{\%\ cap.\ Aplicações}}
+%    \bibliographystyle{acm}
+%    \bibliography{teixeira}
+%    \end{document}
+    \texttt{\blue{\string\documentclass}[12pt]\ac{}report\fc{}\\[1mm]
+      ...\ \gray{\textit{\pc{}\ preâmbulo}}\\[1mm]
+      \blue{\string\begin\ac{}document\fc{}}\\[1mm]
+        \ \ \ \green{\string\input}\redunder{\ac{}capa\fc{}}\\[1mm]
+        \ \ \ \green{\string\input}\redunder{\ac{}folharosto\fc{}}\\[1mm]
+        \ \ \ \blue{\string\tableofcontents}\\[1mm]
+        \ \ \ \green{\string\input}\redunder{\ac{}intro\fc{}}
+        \ \ \ \ \ \ \ \ \ \ \gray{\textit{\%\ cap.\ Introdução}}\\[1mm]
+        \ \ \ \green{\string\input}\redunder{\ac{}teoria\fc{}}
+        \ \ \ \ \ \ \ \ \ \gray{\textit{\%\ cap.\ Teoria}}\\[1mm]
+        \ \ \ \green{\string\input}\redunder{\ac{}aplicacoes\fc{}}
+        \ \ \ \ \ \gray{\textit{\%\ cap.\ Aplicações}}\\[1mm]
+        \ \ \ \blue{\string\bibliographystyle}\brown{\ac{}acm\fc{}}\\[1mm]
+        \ \ \ \blue{\string\bibliography}\redunder{\ac{}teixeira\fc{}}\\[1mm]
+        \blue{\string\end\ac{}document\fc{}}}
+  \end{exemplo}
+
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

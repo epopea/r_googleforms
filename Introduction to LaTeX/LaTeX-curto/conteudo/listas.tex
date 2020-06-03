@@ -1,0 +1,157 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Listas}
+
+\begin{frame}
+  \frametitle{Listas}
+  \begin{block}{Tipos de listas}
+    \begin{itemize}
+    \item não numeradas
+    \item numeradas
+    \item descritivas
+    \item podem ser ``encaixadas'' (ou ``aninhadas'')
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Listas não numeradas}
+  \begin{block}{Listas não numeradas: ambiente \texttt{itemize}}
+    \texttt{\blue{\string\begin\ac{}itemize\fc{}}\\
+        \purple{\string\item}\ ...\\
+        \purple{\string\item}\ ...\\
+        \blue{\string\end\ac{}itemize\fc{}}}
+  \end{block}
+
+  %\pause
+
+  \begin{exemplo}
+
+    \begin{columns}[c]
+      \column{4cm}
+      \texttt{\blue{\string\begin\ac{}itemize\fc{}}\\
+          \purple{\string\item}\ aaa\\
+          \purple{\string\item}\ bbb\\
+          \purple{\string\item}\ ccc\\
+          \blue{\string\end\ac{}itemize\fc{}}}
+      \column{3cm}
+      \begin{itemize}
+      \item aaa
+      \item bbb
+      \item ccc
+      \end{itemize}
+    \end{columns}
+
+  \end{exemplo}
+
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Listas numeradas}
+    \begin{block}{Listas numeradas: ambiente \texttt{enumerate}}
+    \texttt{\blue{\string\begin\ac{}enumerate\fc{}}\\
+        \purple{\string\item}\ ...\\
+        \purple{\string\item}\ ...\\
+        \blue{\string\end\ac{}enumerate\fc{}}}
+  \end{block}
+
+  %\pause
+    \begin{exemplo}
+
+    \begin{columns}[c]
+      \column{4cm}
+      \texttt{\blue{\string\begin\ac{}enumerate\fc{}}\\
+          \purple{\string\item}\ aaa\\
+          \purple{\string\item}\ bbb\\
+          \purple{\string\item}\ ccc\\
+          \blue{\string\end\ac{}enumerate\fc{}}}
+      \column{3cm}
+      \begin{enumerate}
+      \item aaa
+      \item bbb
+      \item ccc
+      \end{enumerate}
+    \end{columns}
+
+  \end{exemplo}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Exemplo com listas aninhadas}
+
+  \begin{exemplo}[com listas aninhadas]
+
+    \begin{columns}[c]
+      \column{4cm}
+      \texttt{\blue{\string\begin\ac{}enumerate\fc{}}\\
+          \purple{\string\item}\ aaa\\
+          \purple{\string\item}\ bbb\\
+          \ \ \green{\string\begin\ac{}itemize\fc{}}\\
+            \ \ \purple{\string\item}\ ccc\\
+            \ \ \purple{\string\item}\ ddd\\
+            \ \ \green{\string\end\ac{}itemize\fc{}}\\
+          \purple{\string\item}\ eee\\
+          \blue{\string\end\ac{}enumerate\fc{}}}
+      \column{3cm}
+      \begin{enumerate}
+      \item aaa
+      \item bbb
+        \begin{itemize}
+        \item ccc
+        \item ddd
+        \end{itemize}
+      \item eee
+      \end{enumerate}
+    \end{columns}
+
+  \end{exemplo}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Lista descritiva}
+    \begin{block}{Listas descritivas: ambiente \texttt{description}}
+    \texttt{\blue{\string\begin\ac{}description\fc{}}\\
+        \purple{\string\item}\redunder{[\textit{nome1}]}\ ...\\
+        \purple{\string\item}\redunder{[\textit{nome2}]}\ ...\\
+        \blue{\string\end\ac{}description\fc{}}}
+  \end{block}
+
+%\pause
+  \begin{exemplo}
+
+    \begin{columns}[c]
+      \column{5.5cm}
+      \texttt{\blue{\string\begin\ac{}description\fc{}}\\
+          \purple{\string\item}\redunder{[aaa]}\\
+          \ \ \ é\ sequência\ de\ três\ a's\\
+          \purple{\string\item}\redunder{[bbb]}\\
+          \ \ \ é\ sequência\ de\ três\ a's\\
+          \purple{\string\item}\redunder{[ccc]}\\
+          \ \ \ é\ sequência\ de\ três\ a's\\
+          \blue{\string\end\ac{}description\fc{}}}
+      \column{4.2cm}
+      \begin{description}
+      \item[aaa] é sequência de três a's
+      \item[bbb] é sequência de três b's
+      \item[ccc] é sequência de três c's
+      \end{description}
+    \end{columns}
+
+  \end{exemplo}
+
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

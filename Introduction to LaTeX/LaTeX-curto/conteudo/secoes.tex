@@ -1,0 +1,74 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Seções}
+
+\begin{frame}
+  \frametitle{Capítulos e seções}
+
+  \begin{block}{Comandos de seccionamento}
+    \begin{itemize}
+    \item \texttt{\green{\string\chapter}\ac{}...\fc{}}
+    \item \texttt{\blue{\string\section}\ac{}...\fc{}}
+    \item \texttt{\blue{\string\subsection}\ac{}...\fc{}}
+    \item \texttt{\blue{\string\subsubsection}\ac{}...\fc{}}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Seccionamento e referências}
+
+  \begin{block}{Referenciando capítulos e seções}
+    Numeração automática $\to$ use \texttt{\purple{\string\label}} e \texttt{\purple{\string\ref}}
+  \end{block}
+
+  \begin{exemplo}
+    \texttt{\blue{\string\chapter}\ac{}Teoria\fc{}\ \purple{\string\label\brown{\ac{}cap:\ teoria\fc{}}}\\
+      \blue{\string\section}\ac{}Notação\fc{}\ \purple{\string\label\brown{\ac{}sec:\ notacao\fc{}}}\\
+      \blue{\string\section}\ac{}Resultados\fc{}\ \purple{\string\label\brown{\ac{}sec:\ resultados\fc{}}}\\
+    ...\ ver\ seção\ \purple{\string\ref\brown{\ac{}sec:\ notacao\fc{}}}\ ...}
+
+  \medskip\hrule\bigskip
+  \setlength{\parindent}{0pt}
+    \textbf{\large Capítulo 1 Teoria}\smallskip\par
+    \textbf{1.1 Notação}\par
+    \textbf{1.2 Resultados}\par
+    ... ver seção 1.1 ...
+  \end{exemplo}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Seccionamento e sumário}
+
+  \begin{block}{Sumário}\medskip
+    \blue{\texttt{\string\tableofcontents}} $\to$ sumário automático
+
+    \begin{itemize}
+    \item Comandos de seccionamento adicionam entradas ao sumário
+    \end{itemize}
+  \end{block}
+
+  % \begin{dica}[``Sintonia fina'' do sumário]\medskip
+  %   \texttt{\blue{\string\section}\green{[\textit{no-sumário}]}\purple{\ac{}\textit{escrito}\fc{}}}\medskip
+  % \end{dica}
+
+  \bigskip
+  \begin{dica}[Incluir coisas no sumário]
+    \begin{itemize}
+    \item Capítulos não numerados não são incluídos no sumário
+    \item \small
+      \texttt{\blue{\string\chapter*}\ac{}Introdução\fc{}
+        \quad\gray{\itshape\% cap. Introdução não numerado} \\
+    \purple{\string\addcontentsline}\ac{}toc\fc{}\ac{}chapter\fc{}\ac{}Introdução\fc{}}
+    \end{itemize}
+  \end{dica}
+
+\end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

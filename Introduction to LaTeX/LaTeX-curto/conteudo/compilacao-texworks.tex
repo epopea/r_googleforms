@@ -1,0 +1,122 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Pondo a mão na massa}
+
+\begin{frame}
+
+\frametitle{Editor padrão: \TeX works}
+
+\imagem[height=6.5cm,keepaspectratio]{texworks-janela.png}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Agora faça você}
+
+Abra o programa TeXworks e digite\medskip
+
+  \framebox{\begin{code*}\scriptsize
+    % \documentclass[12pt]{article} % preâmbulo
+%
+    % \usepackage[utf8]{inputenc} % uso de acentuação
+    % \usepackage[brazil]{babel} % hifenização
+%
+%
+    % \begin{document} % corpo do texto
+%
+    % Oi.  Este é meu 1º documento em \LaTeX.
+%
+    % \end{document}
+    \purple{\string\documentclass}\green{[12pt]}\blue{\ac{}article\fc{}}\ \ \ \ \ \gray{\textit{\pc{}\ preâmbulo}}\\
+    \\
+    \purple{\string\usepackage}\green{[utf8]}\blue{\ac{}inputenc\fc{}}\
+    \ \ \ \ \ \ \gray{\textit{\pc{}\ uso\ de\ acentuação}}\\
+    \purple{\string\usepackage}\green{[brazil]}\blue{\ac{}babel\fc{}}\ \ \ \ \ \ \ \ \gray{\textit{\pc{}\ hifenização}}\\
+    \\
+    \purple{\string\begin}\blue{\ac{}document\fc{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \gray{\textit{\pc{}\ corpo\ do\ texto}}\\
+      \\
+      Oi.\ \ Este\ é\ meu\ 1º\ documento\ em\ \purple{\string\LaTeX}.\\
+      Calcular\ o\ volume\ dum\ paralelepípedo\ é\ trivial.\\
+      \\
+      \purple{\string\end}\blue{\ac{}document\fc{}}
+  \end{code*}}
+
+
+\bigskip
+Crie uma pasta\\
+ e salve este arquivo nela como \green{\texttt{primeiro.tex}}.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Rodando o \LaTeX}
+
+  O processo é feito no TeXworks.
+
+  \begin{itemize}
+  \item Salve o arquivo \texttt{.tex}
+  \item Para ``rodar o \LaTeX'', clique no botão
+    \imagem[height=12pt,keepaspectratio]{botao-latex.png}\\ \imagem[height=40pt,keepaspectratio]{texworks-painel.png}
+  \item Se não houveram erros, parabéns!!
+  \item O visualizador PDF integrado aparecerá.
+
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Compilação SEM erros}
+Se compilou bem, \purple{a janela de compilaçao desaparece no final.}
+
+\begin{center}
+\imagem[width=4.5cm,keepaspectratio]{texworks-compilando.png}\ \ \ \ 
+\imagem[width=4.5cm,keepaspectratio]{texworks-rodoubem.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Compilação COM erros}
+No final, a janela fica, falando a linha (aproximada) do erro.
+\begin{center}
+\imagem[width=8cm,keepaspectratio]{texworks-erro.png}
+\end{center}
+\end{frame}
+
+\section[TeXworks]{\TeX works}
+
+\begin{frame}
+  \frametitle[Comentários mágicos no TeXworks]{Comentários mágicos no
+    \TeX works}
+  
+
+  \begin{dica}{Acrescente as linhas no topo dos arquivos \texttt{.tex}}
+    \begin{itemize}
+    \item \purple{\texttt{\% !TEX encoding = utf8}} \\
+      força o \TeX works a abrir com codificação
+      certa\footnote{... no PC do seu orientador \smiley}
+    \item \purple{\texttt{\% !TEX root = \textit{arquivo}}}\\
+      declara arquivo raiz;\\
+      compilação funciona desde qualquer arquivo
+    \end{itemize}
+  \end{dica}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Mais dicas no \TeX works}
+
+  \begin{description}
+  \item[Realce de sintaxe] Menu Formato $\to$ Realce de sintaxe $\to$
+    $\bullet$~LaTeX.
+  \item[aspas] Menu Formato $\to$ Aspas automáticas $\to$ $\bullet$~Unicode characters.
+  \item[Preferências] Altere também estas preferências no menu Editar
+    $\to$ Preferências (reinicie o editor).
+  \end{description}
+
+\end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

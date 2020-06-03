@@ -1,0 +1,81 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Bibliografia}
+
+\begin{frame}
+  \frametitle{Bibliografia}
+
+  \begin{block}{Jeitos de implementar a bibliografia}
+    \begin{itemize}
+    \item \vantagem\ automático
+    \item \desvantagem\ manual
+
+    \end{itemize}
+
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bibliografia manual}
+
+  \begin{block}{Usando bibliografia manual \leftthumbsdown}
+    \begin{itemize}
+    \item Formata-se as entradas manualmente\\
+      usando o ambiente \blue{\texttt{thebibliography}}\\
+      em que cada entrada começa com
+      \texttt{\green{\string\bibitem}\purple{\ac{}\textit{label}\fc{}}}\medskip
+    \item \texttt{\blue{\string\cite}\purple{\ac{}label\fc{}}} no
+      texto para citar
+    \end{itemize}
+  \end{block}
+
+  \begin{alertblock}{Cuidado}
+    Formatação manual é suscetível a inconsistências.
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bibliografia automática}
+
+  \begin{block}{Usando Bib\TeX\ \leftthumbsup}
+    \begin{itemize}
+    \item Mantém-se um arquivo pessoal com extensão
+      \blue{\texttt{.bib}}\\
+      Ex: \purple{\texttt{teixeira.bib}}
+    \item No arquivo \texttt{.bib}, cada entrada tem um \purple{\texttt{label}}.
+    \item No final do documento, inclui-se as linhas
+      \begin{quote}\upshape
+        \ttfamily
+        \blue{\string\bibliographystyle}\brown{\ac{}$\overbrace{\text{acm}}^{\text{estilo}}$\fc{}}\\[2mm]
+        \blue{\string\bibliography}\redunder{\ac{}teixeira\fc{}}
+      \end{quote}
+    \item \texttt{\blue{\string\cite}\purple{\ac{}label\fc{}}} no
+      texto para citar
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Entradas no arquivo \texttt{.bib}}
+
+  \begin{exemplo}
+    A maioria das obras e artigos tem a entrada Bib\TeX{} pronta.
+
+    \begin{itemize}
+    \item No \blue{MathSciNet (\url{www.ams.org/mathscinet})},\\
+      procurar obra
+    \item Na página da obra, tem uma caixa de combo\\
+      \ \ \ \ \ \ {\textit{Select alternative format}}
+    \item Escolha \textbf{Bib\TeX}
+    \item Mude o label à escolha
+      e inclua no \texttt{.bib}
+    \end{itemize}
+  \end{exemplo}
+\end{frame}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

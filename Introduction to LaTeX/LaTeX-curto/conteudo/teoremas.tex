@@ -1,0 +1,117 @@
+% !TeX root = ../latex-curto.tex
+% !TeX encoding = utf8
+
+\section{Teoremas}
+
+\begin{frame}
+  \frametitle{Teoremas, definições, etc}
+
+  \begin{block}{Ambientes para teoremas, definições, ...}
+
+    \begin{itemize}
+    \item preâmbulo:
+      \texttt{\purple{\string\usepackage}\blue{\ac{}amsthm\fc}}\medskip
+
+    \item Tipo:
+
+      \begin{ttfamily}\small
+        \green{\string\theoremstyle}\blue{\ac{}theorem\fc{}}\ \ \ \ \gray{\textit{\footnotesize\pc{}\ titulo\ negrito,\ corpo\ itálico}}\\
+        \green{\string\theoremstyle}\blue{\ac{}definition\fc{}}\ \gray{\textit{\footnotesize\pc{}\ titulo\ negrito,\ corpo\ normal}}\\
+        \green{\string\theoremstyle}\blue{\ac{}remark\fc{}}\ \ \ \ \ \gray{\textit{\footnotesize\pc{}\
+          titulo\ itálico,\ corpo\ normal}}
+      \end{ttfamily}
+
+    \item Declarar ambientes tipo teorema:\smallskip
+
+      \texttt{\small\purple{\string\newtheorem}\blue{\ac{}amb\fc{}}\green{\ac{}Nome\fc{}}\brown{[contador-superior]}}
+      
+      ou
+
+      \texttt{\small\purple{\string\newtheorem}\blue{\ac{}amb\fc{}}\brown{[numerar-como-amb2]}\green{\ac{}Nome\fc{}}}
+
+    \end{itemize}
+    
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Teoremas, definições, etc}
+
+  \begin{exemplo}[no cabeçalho]
+    \bigskip
+
+    \begin{ttfamily}\small
+      \green{\string\theoremstyle}\blue{\ac{}theorem\fc{}}\\
+      \purple{\string\newtheorem}\blue{\ac{}teo\fc{}}\green{\ac{}Teorema\fc{}}\brown{[chapter]}\\
+      \purple{\string\newtheorem}\blue{\ac{}lema\fc{}}\brown{[teo]}\green{\ac{}Lema\fc{}}\\
+      \ \\
+      \green{\string\theoremstyle}\blue{\ac{}definition\fc{}}\\
+      \purple{\string\newtheorem}\blue{\ac{}defi\fc{}}\brown{[teo]}\green{\ac{}Definição\fc{}}\\
+    \end{ttfamily}
+
+  \end{exemplo}
+
+  {\small Uso no próximo slide...}
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Teoremas, definições, etc}
+
+  \begin{exemplo}[no corpo do documento]
+    \begin{ttfamily}\footnotesize
+%      \gray{\textit{\pc{}\ já\ no\ documento\ ...}}\\
+      \purple{\string\chapter}\blue{\ac{}Teoria\ dos\ números\fc{}}\\
+      \ \\
+      \blue{\string\begin\ac{}defi\fc{}}\brown{[Terno\ pitagórico]}\\
+        \ \ Um\ \string\emph\ac{}terno\ pitagórico\fc{}\ é\ formado\ por\ três\\
+        \ \ números\ naturais\ \dolar{}a\dolar{},\ \dolar{}b\dolar{}\ e\ \dolar{}c\dolar{}\ tais\ que\ \dolar{}a\textasciicircum{}2+b\textasciicircum{}2=c\textasciicircum{}2\dolar{}.\\
+        \blue{\string\end\ac{}defi\fc{}}\\
+      \ \\
+      \blue{\string\begin\ac{}teo\fc{}}\brown{[Fermat-Wiles]}\ \purple{\string\label}\brown{\ac{}teo:\ ultimo\ teo\ fermat\fc{}}\\
+        \ \ \ Não\ existe\ nenhum\ conjunto\ de\ inteiros\ positivos\\
+        \ \ \ \dolar{}x\dolar{},\ \dolar{}y\dolar{},\ \dolar{}z\dolar{}\ e\ \dolar{}n\dolar{},\ com\ \dolar{}n>2\dolar{},\ tais\ que\ \dolar{}x\textasciicircum{}n+y\textasciicircum{}n=z\textasciicircum{}n\dolar{}.\\
+        \blue{\string\end\ac{}teo\fc{}}\\
+      \ \\
+      \blue{\string\begin\ac{}proof\fc{}}\\
+        \ \ Seja\ \dolar{}\string\Delta\ ABC\dolar{}\ um\ triângulo\ retângulo...\\
+        \blue{\string\end\ac{}proof\fc{}}
+    \end{ttfamily}
+
+  \end{exemplo}
+
+  {\small Resultado no próximo slide...}
+  
+\end{frame}
+
+\begin{frame}
+    \frametitle{Teoremas, definições, etc}
+
+    \begin{exemplo}\medskip
+      \textbf{\Large Capítulo 1 \\[2mm] Teoria dos números} \bigskip\bigskip
+
+      \small
+
+      \textbf{Definição 1.1 (Terno pitagórico).}  
+      Um \emph{terno pitagórico} é formado por três números naturais $a$,
+      $b$ e $c$ tais que $a^2+b^2=c^2$.\bigskip
+      
+      \textbf{Teorema 1.2 (Fermat-Wiles).} 
+      \textit{Não existe nenhum conjunto de inteiros positivos $x$, $y$, $z$ e
+      $n$, com $n>2$, tais que}
+      \[ x^n+y^n=z^n. \]
+      
+      \textit{Demonstração.} 
+        Seja $\Delta ABC$ um triângulo retângulo... \hfill $\square$
+      
+
+    \end{exemplo}
+  
+\end{frame}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../latex-curto"
+%%% End: 

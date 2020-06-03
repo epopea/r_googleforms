@@ -1,0 +1,189 @@
+% !TeX root = latex-curto.tex
+% !TeX encoding = utf8
+
+% Personaizando o beamer
+\usetheme{default}
+\usecolortheme{orchid}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx,color}
+\usepackage{amsmath,amssymb,dsfont}
+\usepackage{wasysym}
+\usepackage{multicol,bm}
+\usepackage{etex}
+\usepackage{tikz}
+
+\setbeamersize{description width=0cm}
+
+\frenchspacing
+
+% logotipo do TikZ -> \Tikz
+\newcommand{\Tikz}{Ti\textit{k}Z}
+
+% emulando o pacote dingbat
+%\usepackage{dingbat}
+\makeatletter
+\providecommand{\arkfamily}{\fontencoding{U}\fontfamily{ark}\selectfont}
+\providecommand{\ark@sym}[1]{{\arkfamily\symbol{#1}}}
+\newcommand{\leftthumbsup}{\ark@sym{'125}}
+\newcommand{\leftthumbsdown}{\ark@sym{'104}}
+\makeatother
+
+\newcommand{\imagem}[2][]{\includegraphics[#1]{./imagens/#2}}
+
+\newcommand{\vantagem}{{\darkgreen{\leftthumbsup}}}
+\newcommand{\desvantagem}{{\red{\leftthumbsdown}}}
+
+\newcommand{\sen}{\operatorname{sen}}
+
+\usepackage[brazil]{babel}
+
+\usepackage{enumerate}
+
+%\renewcommand{\definitionname}{Definição}
+
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\redunder}[1]{\textcolor{red}{\underline{#1}}}
+\newcommand{\green}[1]{\textcolor[rgb]{0,0.4,0}{#1}}
+\newcommand{\darkgreen}[1]{\textcolor[rgb]{0,0.35,0}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\purple}[1]{\textcolor{purple}{#1}}
+\newcommand{\cyan}[1]{\textcolor{cyan}{#1}}
+\newcommand{\brown}[1]{\textcolor{brown}{#1}}
+\newcommand{\gray}[1]{\textcolor{gray}{#1}}
+\newcommand{\black}[1]{\textcolor{black}{#1}}
+
+\theoremstyle{example}
+\newtheorem*{exemplo}{Exemplo}
+\newtheorem*{exemplos}{Exemplos}
+\newtheorem*{dica}{Dica}
+
+
+%% macros para escrever em texto puro
+\newcommand{\ttbackslash}{\char92}
+\let\bs\ttbackslash
+\newcommand{\ttabrechaves}{\char123}
+\newcommand{\ttfechachaves}{\char125}
+\let\ac\ttabrechaves
+\let\fc\ttfechachaves
+\newcommand{\ttporcento}{\char37}
+\let\pc\ttporcento
+\newcommand{\ttdolar}{\char36}
+\let\dolar\ttdolar
+\newcommand{\ttet}{\char38}
+\let\et\ttet
+\newcommand{\ttcerquinha}{\char35}
+\let\num\ttcerquinha
+\newcommand{\ttmaior}{\char62}
+\let\maior\ttmaior
+\newcommand{\ttmenor}{\char60}
+\let\menor\ttmenor
+\newcommand{\ttaspasimples}{\char39}
+\let\aspa\ttaspasimples
+\newcommand{\ttgrave}{\char96}
+\let\grave\ttgrave
+\newcommand{\ttus}{\char95}
+\let\us\ttus
+
+
+\newenvironment{code}{\medskip
+  \noindent\mbox{}\hspace{1cm}\begin{minipage}[t]{10cm}\ttfamily\obeylines}
+  {\end{minipage}}
+
+\newenvironment{code*}{\begin{minipage}[t]{10cm}\ttfamily\obeylines}{\end{minipage}}
+
+\makeatletter
+\renewcommand{\definition}{\@thm {\let \thm@swap \@gobble \th@definition }{theorem}{Definição}}
+\makeatother
+
+\setbeamercovered{transparent=50}
+
+\newcommand{\vecs}[1]{(#1_1,\dots,#1_n)}
+\newcommand{\vecx}[2][n]{(#2_1,\dots,#2_{#1})}
+
+\endinput
+
+
+(progn
+
+(fset 'frame
+   [?\\ ?b ?e ?g ?i ?n ?\{ ?f ?r ?a ?m ?e ?\} return ?\\ ?e ?n ?d ?\{ ?f ?r ?a ?m ?e ?\} home return up tab ?\\ ?f ?r ?a ?m ?e ?t ?i ?t ?l ?e ?\{ ?\} left])
+
+(defun codify (prefix)
+  "Substitui código puro em sua versão tipografada com as macros do
+  curso de LaTeX. Com argumento prefixo, rodeia com \texttt{...}."
+  (interactive "P")
+  (let* ((open-curly-chackets-command "\\\\ac")
+	 (close-curly-chackets-command "\\\\fc")
+	 (dollar-command "\\\\dolar")
+         (circ-command "\\\\textasciicircum")
+	 (percent-command "\\\\pc")
+         (underscore-command "\\\\us")
+         (et-command "\\\\et")
+         (backslash-command "\\\\bs")
+	 (replace-list (list
+			 (cons "\\\\" "\\\\string\\\\")
+			 (cons "{" (concat open-curly-chackets-command "{}"))
+			 (cons "}" (concat close-curly-chackets-command "{}"))
+			 ;; fixing brackets bug
+			 (cons (concat open-curly-chackets-command "{"
+				       close-curly-chackets-command "{}")
+			       (concat open-curly-chackets-command
+                               "{}"))
+                         ;; fixing bug for \\
+                         (cons "\\\\string\\\\\\\\string"
+                               (concat backslash-command
+                                       backslash-command "{}"))
+			 (cons "\\$" (concat dollar-command "{}"))
+			 (cons "&" (concat et-command "{}"))
+			 (cons "\\^" (concat circ-command "{}"))
+                         (cons "_" (concat underscore-command "{}"))
+			 (cons "%\\([^\n]*\\)\n"
+			       (concat "\\\\textit{"
+				       percent-command
+				       "{}\\1}\n"))
+			 (cons " " "\\\\ ")
+			 (cons "^\\\\ \\\\ \\\\ \\\\ " "    ")
+			 (cons "\n" "\\\\\\\\\n")))
+	 (is-region (and transient-mark-mode
+			 mark-active))
+	 (beg (set-marker (make-marker) (if is-region
+					    (region-beginning) (point-min))))
+	 (end (set-marker (make-marker) (if is-region
+					    (region-end) (point-max))))
+	 (region-str-com (buffer-substring beg end))
+	 (region-str-changed (copy-sequence region-str-com))
+	 (deactivate-mark nil)
+	 (case-repace nil)
+	 (case-fold-search nil))
+					; commenting
+					; reclacing in string
+    (dolist (rep replace-list)
+      (let* ((from (car rep))
+	     (to (cdr rep)))
+	(setq region-str-changed
+	      (replace-regexp-in-string from to region-str-changed))))
+    (save-excursion
+      (delete-region beg end)
+      (goto-char beg)
+      (cond ((equal prefix '(4)) 	; insert subs in \texttt{ }
+	     (insert "\\texttt{" region-str-changed "}"))
+	    ((equal prefix '(16)) ; insert commented raw + subs in \texttt{ }
+	     (setq region-str-com
+		   (replace-regexp-in-string "^" "%" region-str-com))
+	     (insert region-str-com "\n")
+	     (insert "\\texttt{" region-str-changed "}"))
+	    (t		; insert only subs
+	     (insert region-str-changed))))
+    (set-marker beg nil)
+    (set-marker end nil)))
+
+(local-set-key (kbd "C-c C-d") 'codify)
+
+)  ; fim do progn
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "latex-curto"
+%%% End: 
