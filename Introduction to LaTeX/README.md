@@ -1,3 +1,5 @@
+# Introduction to <tt>LaTeX</tt>
+
 This workshop provides basic guidance on the <tt>LaTeX</tt> environment, including:
 
 * Different IDEs (Integrated Development Environments)
