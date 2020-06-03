@@ -19,6 +19,7 @@ if(!require(dplyr)){install.packages("dplyr");require(dplyr)}
 if(!require(magrittr)){install.packages("magrittr");require(magrittr)}
 if(!require(likert)){install.packages("likert");require(likert)}
 if(!require(skimr)){install.packages("skimr");require(skimr)}
+if(!require(ggplot2)){install.packages("ggplot2");require(ggplot2)}
 
 #------------------------------------------------#
 # PRIMEIROS PASSOS AO IMPORTAR UM BANCO DE DADOS #
@@ -156,7 +157,7 @@ likert_X10 <- c("Discordo completamente",
                 "Concordo completamente")
 
 dados <- dados %>% 
-  mutate(X10 = factor(dados$X10,
+  mutate(X10 = factor(X10,
                       levels = c(1:5),
                       ordered = TRUE,
                       labels=likert_X10)) 
@@ -241,6 +242,67 @@ CrossTable(dados$X12, dados$Dummy_Idade, # as duas variaveis de analise
            format=c("SPSS"), # tipo de formato de apresentacao
            digits=2) # numero de casas decimais para percentual
 
+#-----------------------#
+# Representacao Grafica #
+#-----------------------#
+
+# Representando variaveis nominais com grafico de barras
+
+ggplot(dados,aes(x=X8,fill=X8)) + 
+  geom_bar() +
+  labs(title = "Grafico de Barras",
+       x = "Sexo ao nascer",
+       y = "Contagem") +
+  geom_text(stat='count',
+            aes(label=..count..),
+            vjust=-0.5) +
+  scale_x_discrete(labels=c("Light","Heavy")) +
+  #scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual("Sexo ao nascer",
+                    labels = c("Light", "Heavy"),
+                    values = c("green", "red"))
+
+barX=barplot(main="Grafico de Barras",table(dados$X8),xlab="Sexo ao Nascer", ylab="Contagem", col=c("green","red"), names.arg=c("Feminino","Masculino"))
+text(cex=1, pos=3, x=barX, y=table(dados$X8), xpd=TRUE) 
+legend("topleft",legend=c("Feminino","Masculino"),fill=c("green","red"))
+
+# Boxplot
+
+with(dados,boxplot(Idade ~ coorte))
+
+ggplot(dados,aes(y=Idade,x=coorte)) +
+  geom_boxplot()
+
+# Scatterplot
+
+plot(dados$X6,dados$Idade,pch=19,col="blue")
+
+ggplot(dados,aes(x=X6,y=Idade))+
+  geom_point() + geom_smooth(method="loess")
+
+# Line Plot
+
+plot(dados$X6,dados$Idade,frame=F, pch=19)
+lines(sort(dados$X6),sort(dados$Idade,decreasing=T),type = "l")
+
+ggplot(dados,aes(x=X6,y=Idade)) +
+  geom_line() +
+  geom_point()
+
+# Pie Plot
+
+pie(table(dados$X9),col=c("red","green","blue"))
+legend("bottomleft",legend=levels(dados$X9),
+       fill=c("red","green","blue"),
+       cex=0.6)
+
+ggplot(dados, aes(x=factor(1), fill=X9))+
+  geom_bar(width = 1)+
+  coord_polar("y")
+
+rm(barX,temp,colsummary,x)
+rm(list = ls.str(mode = 'character'))
+rm(list = lsf.str(all=T))
 # Salvando novamente os dados depois de tudo que fizemos
-save.image(file="dados.workshop.RData")
+save.image(file="dados.workshop.modificado.RData")
 
