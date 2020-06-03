@@ -5,7 +5,7 @@
 # Data: 09/06/2020
 # Horário: 14:00
 # Duração: 90 minutos
-#We have to change X1(Date), X7(Date), X8(Factor), X9(Very complicated Factor), X11(Factor)
+
 #--------------------------------#
 # INICIANDO A SESSÃO DE TRABALHO #
 #--------------------------------#
