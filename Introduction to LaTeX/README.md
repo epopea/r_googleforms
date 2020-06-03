@@ -9,7 +9,7 @@ This workshop provides basic guidance on the <tt>LaTeX</tt> environment, includi
 * Use of mathematical notation
 * Integration of <tt>LaTeX</tt> and <tt>R</tt> (through <tt>knitr</tt>)
 
-Most of the content is based on the Introduction to LaTeX course offered by Prof. Miguel V. S. Frasson (USP). His website with all the links and contents of his LaTeX course can be assessed at: <https://sites.icmc.usp.br/frasson/latex/index.html>.
+Most of the content is based on the Introduction to <tt>LaTeX</tt> course offered by Prof. Miguel V. S. Frasson (USP). His website with all the links and contents of his <tt>LaTeX</tt> course can be assessed at: <https://sites.icmc.usp.br/frasson/latex/index.html>.
 
 We adapted Prof. Frasson's material to reflect the following updates:
 
