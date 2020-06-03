@@ -142,6 +142,11 @@ tabs = function(x){
 }
 tabs(dados$Dummy_Idade)
 
+# Tabela de Frequencia Relativa de Tipo de Disciplina a ser Dada Online
+tabs(dados$X9)
+
+x=unlist(strsplit(dados$X9,","))
+tabs(x)
 
 # Analisando uma variavel qualitativa ordinal
 
