@@ -1,4 +1,4 @@
-This workshop provides basic guidance on <tt>LaTeX</tt> environment, including:
+This workshop provides basic guidance on the <tt>LaTeX</tt> environment, including:
 
 * Different IDEs (Integrated Development Environments)
 * Basic notation (commands)
