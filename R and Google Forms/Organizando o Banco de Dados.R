@@ -71,12 +71,14 @@ dados$Quartil_Idade <- cut(dados$Idade, breaks = quantile(dados$Idade, probs = s
 dados$grupo_etario <- cut(dados$Idade, breaks = seq(0, 80, 5), include.lowest = TRUE, right = FALSE)
 
 # Criando uma nova variável: Coorte
-dados$coorte <- as.factor(case_when(
-  dados$X6 < 2010 ~ "<2010",
+dados$coorte <- ordered(case_when(
+  dados$X6 < 2010 ~ "1990-2010",
   between(dados$X6, 2010, 2014) ~ "2010-2014",
-  between(dados$X6, 2015, 2019) ~ "2015-2019",
+  between(dados$X6, 2015, 2017) ~ "2015-2017",
+  dados$X6==2018 ~ "2018",
+  dados$X6==2019 ~ "2019",
   TRUE ~ "2020"
-  ))
+))
 
 # Excluindo uma variavel do banco de dados
 
@@ -116,7 +118,10 @@ save(dados,file="dados.RData")
 # Descritiva do banco de dados
 skimr::skim(dados)
 
+
+#--------------------------------------#
 # Descritiva de variaveis selecionadas #
+#--------------------------------------#
 
 # Descrevendo variaveis qualitativas nominais
 
@@ -145,8 +150,9 @@ tabs(dados$Dummy_Idade)
 # Tabela de Frequencia Relativa de Tipo de Disciplina a ser Dada Online
 tabs(dados$X9)
 
-x=unlist(strsplit(dados$X9,","))
+x=unlist(strsplit(as.character(dados$X9),","))
 tabs(x)
+
 
 # Analisando uma variavel qualitativa ordinal
 
@@ -197,18 +203,31 @@ dados <- dados %>%
 
 # Salvando um subconjunto de dados com as variaveis tipo Likert
 
-temp = subset(dados,select=c(X10,X12,X13))
+temp = subset(dados,select=c(X10,X12,X13)) # Usando subset (do R base)
+temp <- dados %>% select(X10,X12,X13) # Usando pipe e select (do dplyr)
 
 # Conferindo as classes das novas variaveis (todas tem que ser fator)
 str(temp)
-temp=as.data.frame(temp)
+#temp=as.data.frame(temp) # Se precisar alterar para o formato dataframe (coercao explicita)
 names(temp)
 colnames(temp) = c("Aulas online x presenciais",
                    "Vulnerabilidade a Covid-19",
                    "Expertise em codigo-aberto")
-colsummary <- likert(temp)
+X11() #usar apenas se e usuario MacOS
+colsummary <- likert(temp, grouping = dados$coorte)
 summary(colsummary) # Descrevendo os resultados
 plot(colsummary) # Criando um grafico de barra dos resultados
+
+# Gerando um grafico de densidade dos padroes de resposta por variavel de agrupamento (coorte)
+# Sem agrupamento
+colsummary <- likert(temp)
+likert.density.plot(colsummary)
+# Com agrupamento
+colsummary <- likert(temp, grouping = dados$coorte)
+likert.density.plot(colsummary)
+
+# Supporta codigo para LaTeX
+xtable(colsummary)
 
 # Tabelas Cruzadas de duas variáveis qualitativas
 
@@ -310,4 +329,3 @@ rm(list = ls.str(mode = 'character'))
 rm(list = lsf.str(all=T))
 # Salvando novamente os dados depois de tudo que fizemos
 save.image(file="dados.workshop.modificado.RData")
-
